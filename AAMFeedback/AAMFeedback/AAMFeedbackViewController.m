@@ -8,7 +8,6 @@
 
 #import "AAMFeedbackViewController.h"
 #import "AAMFeedbackTopicsViewController.h"
-#include <sys/types.h>
 #include <sys/sysctl.h>
 
 @interface AAMFeedbackViewController(private)
@@ -352,29 +351,29 @@
 
 - (NSString*)_feedbackSubject
 {
-    return [NSString stringWithFormat:@"%@: %@", [self _appName],[self _selectedTopicToSend], nil];
+    return [NSString stringWithFormat:@"%@: %@", [self _appName], [self _selectedTopicToSend]];
 }
    
 - (NSString*)_feedbackBody
 {
     NSString *body = [NSString stringWithFormat:@"%@\n\n\nDevice:\n%@\n\niOS:\n%@\n\nApp:\n%@ %@",
-                      _descriptionTextView.text,
-                      [self _platformString],
-                      [UIDevice currentDevice].systemVersion, 
-                      [self _appName],
-                      [self _appVersion], nil];
+                                                _descriptionTextView.text,
+                                                [self _platformString],
+                                                [UIDevice currentDevice].systemVersion,
+                                                [self _appName],
+                                                [self _appVersion]];
 
     return body;
 }
 
 - (NSString*)_selectedTopic
 {
-    return [topics objectAtIndex:_selectedTopicsIndex];
+    return [topics objectAtIndex:(NSUInteger) _selectedTopicsIndex];
 }
 
 - (NSString*)_selectedTopicToSend
 {
-    return [topicsToSend objectAtIndex:_selectedTopicsIndex];
+    return [topicsToSend objectAtIndex:(NSUInteger) _selectedTopicsIndex];
 }
 
 - (NSString*)_appName
