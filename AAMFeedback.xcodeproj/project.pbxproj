@@ -22,7 +22,7 @@
 		3D0263A514861EE800FBC566 /* AAMFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0263A314861EE800FBC566 /* AAMFeedbackViewController.m */; };
 		3D0263B014861F7100FBC566 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0263AF14861F7100FBC566 /* MessageUI.framework */; };
 		3D0263B91486213100FBC566 /* AAMLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D0263B71486213100FBC566 /* AAMLocalizable.strings */; };
-		3D1F0C9C1486215C0089D168 /* AAMLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D0263B71486213100FBC566 /* AAMLocalizable.strings */; };
+		73CA9E0D1679D5EC000CF268 /* AAMLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73CA9E0B1679D5EC000CF268 /* AAMLocalizable.strings */; };
 		BFD9F2F0404F49DC961DF2D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 051A7CE4E958428784BEC091 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -62,8 +62,8 @@
 		3D0263A314861EE800FBC566 /* AAMFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAMFeedbackViewController.m; sourceTree = "<group>"; };
 		3D0263AF14861F7100FBC566 /* MessageUI.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3D0263B31486200B00FBC566 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = /Users/fukatsutakayuki/Documents/git/AAMFeedback/AAMFeedbackTests/ja.lproj/InfoPlist.strings; sourceTree = "<absolute>"; };
-		3D0263B81486213100FBC566 /* AAMLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = AAMLocalizable.strings; path = ../../ja.lproj/AAMLocalizable.strings; sourceTree = "<group>"; };
-		3D1F0C9B1486215C0089D168 /* AAMLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = AAMLocalizable.strings; path = ../../en.lproj/AAMLocalizable.strings; sourceTree = "<group>"; };
+		73CA9E0C1679D5EC000CF268 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AAMLocalizable.strings; sourceTree = "<group>"; };
+		73CA9E0E1679D5F2000CF268 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AAMLocalizable.strings; sourceTree = "<group>"; };
 		8A159C9CADF643BC9BCA3426 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -96,7 +96,7 @@
 		17B5C6012F46647C6A7E1531 /* AAMLocalizable */ = {
 			isa = PBXGroup;
 			children = (
-				3D0263B71486213100FBC566 /* AAMLocalizable.strings */,
+				73CA9E0B1679D5EC000CF268 /* AAMLocalizable.strings */,
 			);
 			path = AAMLocalizable;
 			sourceTree = "<group>";
@@ -272,7 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D0263B91486213100FBC566 /* AAMLocalizable.strings in Resources */,
-				3D1F0C9C1486215C0089D168 /* AAMLocalizable.strings in Resources */,
+				73CA9E0D1679D5EC000CF268 /* AAMLocalizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,8 +360,16 @@
 		3D0263B71486213100FBC566 /* AAMLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3D0263B81486213100FBC566 /* AAMLocalizable.strings */,
-				3D1F0C9B1486215C0089D168 /* AAMLocalizable.strings */,
+			);
+			name = AAMLocalizable.strings;
+			path = /Users/azu/workspace/objectiveC/AAMFeedback/AAMFeedback/AAMFeedback/AAMLocalizable;
+			sourceTree = "<absolute>";
+		};
+		73CA9E0B1679D5EC000CF268 /* AAMLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73CA9E0C1679D5EC000CF268 /* ja */,
+				73CA9E0E1679D5F2000CF268 /* en */,
 			);
 			name = AAMLocalizable.strings;
 			sourceTree = "<group>";
