@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/fladdict/AAMFeedback'
   s.authors  = { 'fladdict' => 'fukatsu@gmail.com', 'azu' => 'azuciao@gmail.com' }
   s.license  = { :type => 'MIT', :file => 'LICENSE' }
-  s.source   = { :git => 'https://github.com/azu/AAMFeedback.git', :tag => '0.0.1' }
+  s.source   = { :git => 'https://github.com/azu/AAMFeedback.git' }
   s.platform = :ios
   s.source_files = 'AAMFeedback/AAMFeedback/*.{h,m}'
   s.resources = 'AAMFeedback/AAMFeedback/*.bundle'
