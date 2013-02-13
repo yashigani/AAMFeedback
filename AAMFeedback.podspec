@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.source   = { :git => 'https://github.com/azu/AAMFeedback.git' }
   s.platform = :ios
   s.source_files = 'AAMFeedback/AAMFeedback/*.{h,m}'
-  s.resources = 'AAMFeedback/AAMFeedback/AAMLocalizable/*'
+  s.resources = 'AAMFeedback/AAMFeedback/AAMLocalizable/*.lproj'
   s.framework = 'MessageUI'
   s.dependency 'UIDeviceIdentifier'
 end

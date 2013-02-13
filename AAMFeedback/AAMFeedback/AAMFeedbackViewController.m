@@ -9,18 +9,25 @@
 #import "AAMFeedbackViewController.h"
 #import "AAMFeedbackTopicsViewController.h"
 #import "UIDeviceHardware.h"
-#include <sys/sysctl.h>
 
-@interface AAMFeedbackViewController(private)
-    - (NSString *) _platform;
-    - (NSString *) _platformString;
-    - (NSString*)_feedbackSubject;
-    - (NSString*)_feedbackBody;
-    - (NSString*)_appName;
-    - (NSString*)_appVersion;
-    - (NSString*)_selectedTopic;
-    - (NSString*)_selectedTopicToSend;
-    - (void)_updatePlaceholder;
+@interface AAMFeedbackViewController (
+private)
+
+- (NSString *)_platformString;
+
+- (NSString *)_feedbackSubject;
+
+- (NSString *)_feedbackBody;
+
+- (NSString *)_appName;
+
+- (NSString *)_appVersion;
+
+- (NSString *)_selectedTopic;
+
+- (NSString *)_selectedTopicToSend;
+
+- (void)_updatePlaceholder;
 @end
 
 
@@ -33,42 +40,45 @@
 @synthesize ccRecipients;
 @synthesize bccRecipients;
 
+static NSString * const AAMLocalizableTable = @"AAMLocalizable";
+- (NSBundle *)localizableBundle {
+    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"AAMLocalizable.bundle"];
+    NSBundle *bundle = [NSBundle bundleWithPath:path];
+    return bundle;
+}
 
-+ (BOOL)isAvailable
-{
-    if([MFMailComposeViewController class]){
++ (BOOL)isAvailable {
+    if ([MFMailComposeViewController class]) {
         return YES;
     }
     return NO;
 }
 
--(id)init
-{
+- (id)init {
     self = [super initWithStyle:UITableViewStyleGrouped];
-    if(self){
-        self.topics = [[[NSArray alloc]initWithObjects:
-                       @"AAMFeedbackTopicsQuestion",
-                       @"AAMFeedbackTopicsRequest",
-                       @"AAMFeedbackTopicsBugReport",
-                       @"AAMFeedbackTopicsMedia",
-                       @"AAMFeedbackTopicsBusiness",
-                       @"AAMFeedbackTopicsOther", nil]autorelease];
-        
-        self.topicsToSend = [[[NSArray alloc]initWithObjects:
-                             @"Question",
-                             @"Request",
-                             @"Bug Report",
-                             @"Media",
-                             @"Business",
-                             @"Other", nil]autorelease];
+    if (self) {
+        self.topics = [[[NSArray alloc] initWithObjects:
+                @"AAMFeedbackTopicsQuestion",
+                @"AAMFeedbackTopicsRequest",
+                @"AAMFeedbackTopicsBugReport",
+                @"AAMFeedbackTopicsMedia",
+                @"AAMFeedbackTopicsBusiness",
+                @"AAMFeedbackTopicsOther", nil] autorelease];
+
+        self.topicsToSend = [[[NSArray alloc] initWithObjects:
+                @"Question",
+                @"Request",
+                @"Bug Report",
+                @"Media",
+                @"Business",
+                @"Other", nil] autorelease];
     }
     return self;
 }
 
-- (id)initWithTopics:(NSArray*)theIssues
-{
+- (id)initWithTopics:(NSArray *) theIssues {
     self = [self init];
-    if(self){
+    if (self) {
         self.topics = theIssues;
         self.topicsToSend = theIssues;
     }
@@ -88,90 +98,79 @@
 
 #pragma mark - View lifecycle
 
-- (void)loadView
-{
+- (void)loadView {
     [super loadView];
-    self.title = NSLocalizedString(@"AAMFeedbackTitle", nil);
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDidPress:)]autorelease];
-    
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"AAMFeedbackButtonMail", nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)]autorelease];
+
+    self.title = NSLocalizedStringFromTableInBundle(@"AAMFeedbackTitle", AAMLocalizableTable, [self localizableBundle], nil);
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDidPress:)] autorelease];
+
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"AAMFeedbackButtonMail", AAMLocalizableTable, [self localizableBundle], nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)] autorelease];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     _descriptionPlaceHolder = nil;
     _descriptionTextView = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL) animated {
     [super viewWillAppear:animated];
     [self _updatePlaceholder];
     [self.tableView reloadData];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL) animated {
     [super viewDidAppear:animated];
-    if(_isFeedbackSent){
+    if (_isFeedbackSent) {
         [self dismissModalViewControllerAnimated:YES];
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL) animated {
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL) animated {
     [super viewDidDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *) tableView {
     return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if(section==0){
+- (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section {
+    if (section == 0) {
         return 2;
     }
     return 4;
 }
 
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.section==0 && indexPath.row==1){
+- (float)tableView:(UITableView *) tableView heightForRowAtIndexPath:(NSIndexPath *) indexPath {
+    if (indexPath.section == 0 && indexPath.row == 1) {
         return MAX(88, _descriptionTextView.contentSize.height);
     }
-    
+
     return 44;
 }
 
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
+- (NSString *)tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger) section {
     switch (section) {
         case 0:
-            return NSLocalizedString(@"AAMFeedbackTableHeaderTopics", nil);
+            return NSLocalizedStringFromTableInBundle(@"AAMFeedbackTableHeaderTopics", AAMLocalizableTable, [self localizableBundle], nil);
             break;
         case 1:
-            return NSLocalizedString(@"AAMFeedbackTableHeaderBasicInfo", nil);
+            return NSLocalizedStringFromTableInBundle(@"AAMFeedbackTableHeaderBasicInfo", AAMLocalizableTable, [self localizableBundle], nil);
             break;
         default:
             break;
@@ -179,52 +178,51 @@
     return nil;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
     static NSString *CellIdentifier = @"Cell";
-    
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        if(indexPath.section==1){
+        if (indexPath.section == 1) {
             //General Infos
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
-        }else{
-            if(indexPath.row==0){
+        } else {
+            if (indexPath.row == 0) {
                 //Topics
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1      reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }else{
+            } else {
                 //Topics Description
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault      reuseIdentifier:CellIdentifier] autorelease];
-                
+                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                _descriptionTextView = [[[UITextView alloc]initWithFrame:CGRectMake(10, 0, 300, 88)]autorelease];
+                _descriptionTextView = [[[UITextView alloc] initWithFrame:CGRectMake(10, 0, 300, 88)] autorelease];
                 _descriptionTextView.backgroundColor = [UIColor clearColor];
                 _descriptionTextView.font = [UIFont systemFontOfSize:16];
                 _descriptionTextView.delegate = self;
                 _descriptionTextView.scrollEnabled = NO;
                 _descriptionTextView.text = self.descriptionText;
                 [cell.contentView addSubview:_descriptionTextView];
-                
-                _descriptionPlaceHolder = [[[UITextField alloc]initWithFrame:CGRectMake(16, 8, 300, 20)]autorelease];
+
+                _descriptionPlaceHolder = [[[UITextField alloc] initWithFrame:CGRectMake(16, 8, 300, 20)] autorelease];
                 _descriptionPlaceHolder.font = [UIFont systemFontOfSize:16];
-                _descriptionPlaceHolder.placeholder = NSLocalizedString(@"AAMFeedbackDescriptionPlaceholder", nil);
+                _descriptionPlaceHolder.placeholder = NSLocalizedStringFromTableInBundle(@"AAMFeedbackDescriptionPlaceholder", AAMLocalizableTable, [self localizableBundle], nil);
                 _descriptionPlaceHolder.userInteractionEnabled = NO;
                 [cell.contentView addSubview:_descriptionPlaceHolder];
-                
+
                 [self _updatePlaceholder];
             }
         }
     }
-    
+
     // Configure the cell...
     switch (indexPath.section) {
         case 0:
             switch (indexPath.row) {
                 case 0:
-                    
-                    cell.textLabel.text = NSLocalizedString(@"AAMFeedbackTopicsTitle", nil);
-                    cell.detailTextLabel.text = NSLocalizedString([self _selectedTopic],nil);
+
+                    cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsTitle", AAMLocalizableTable, [self localizableBundle], nil);
+                    cell.detailTextLabel.text = NSLocalizedStringFromTableInBundle([self _selectedTopic], AAMLocalizableTable, [self localizableBundle], nil);
                     break;
                 case 1:
                 default:
@@ -260,7 +258,7 @@
         default:
             break;
     }
-    
+
     return cell;
 }
 
@@ -268,12 +266,11 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.section==0 && indexPath.row==0){
+- (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {
+    if (indexPath.section == 0 && indexPath.row == 0) {
         [_descriptionTextView resignFirstResponder];
-        
-        AAMFeedbackTopicsViewController *vc = [[[AAMFeedbackTopicsViewController alloc]initWithStyle:UITableViewStyleGrouped]autorelease];
+
+        AAMFeedbackTopicsViewController *vc = [[[AAMFeedbackTopicsViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
         vc.delegate = self;
         vc.selectedIndex = _selectedTopicsIndex;
         [self.navigationController pushViewController:vc animated:YES];
@@ -281,21 +278,19 @@
 }
 
 
-- (void)cancelDidPress:(id)sender
-{
+- (void)cancelDidPress:(id) sender {
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)nextDidPress:(id)sender
-{
+- (void)nextDidPress:(id) sender {
     [_descriptionTextView resignFirstResponder];
-    
+
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.mailComposeDelegate = self;
     [picker setToRecipients:self.toRecipients];
-    [picker setCcRecipients:self.ccRecipients];  
+    [picker setCcRecipients:self.ccRecipients];
     [picker setBccRecipients:self.bccRecipients];
-    
+
     [picker setSubject:[self _feedbackSubject]];
     [picker setMessageBody:[self _feedbackBody] isHTML:NO];
     [self presentModalViewController:picker animated:YES];
@@ -303,60 +298,52 @@
 }
 
 
-- (void)textViewDidChange:(UITextView *)textView
-{
+- (void)textViewDidChange:(UITextView *) textView {
     CGRect f = _descriptionTextView.frame;
     f.size.height = _descriptionTextView.contentSize.height;
     _descriptionTextView.frame = f;
     [self _updatePlaceholder];
     self.descriptionText = _descriptionTextView.text;
-    
+
     //Magic for updating Cell height
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
 }
 
 
--(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    if(result==MFMailComposeResultCancelled){
-    }else if(result==MFMailComposeResultSent){
+- (void)mailComposeController:(MFMailComposeViewController *) controller didFinishWithResult:(MFMailComposeResult) result error:(NSError *) error {
+    if (result == MFMailComposeResultCancelled) {
+    } else if (result == MFMailComposeResultSent) {
         _isFeedbackSent = YES;
-    }else if(result==MFMailComposeResultFailed){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
-                                                        message:@"AAMFeedbackMailDidFinishWithError"
-                                                       delegate:nil 
-                                              cancelButtonTitle:nil 
-                                              otherButtonTitles:@"OK", nil];
+    } else if (result == MFMailComposeResultFailed) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"AAMFeedbackMailDidFinishWithError"
+                                                       delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
         [alert release];
     }
-    [controller dismissModalViewControllerAnimated:YES]; 
+    [controller dismissModalViewControllerAnimated:YES];
 }
 
 
-- (void)feedbackTopicsViewController:(AAMFeedbackTopicsViewController *)feedbackTopicsViewController didSelectTopicAtIndex:(NSInteger)selectedIndex {
+- (void)feedbackTopicsViewController:(AAMFeedbackTopicsViewController *) feedbackTopicsViewController didSelectTopicAtIndex:(NSInteger) selectedIndex {
     _selectedTopicsIndex = selectedIndex;
 }
 
 #pragma mark - Internal Info
 
-- (void)_updatePlaceholder
-{
-    if([_descriptionTextView.text length]>0){
+- (void)_updatePlaceholder {
+    if ([_descriptionTextView.text length] > 0) {
         _descriptionPlaceHolder.hidden = YES;
-    }else{
+    } else {
         _descriptionPlaceHolder.hidden = NO;
     }
 }
 
-- (NSString*)_feedbackSubject
-{
+- (NSString *)_feedbackSubject {
     return [NSString stringWithFormat:@"%@: %@", [self _appName], [self _selectedTopicToSend]];
 }
-   
-- (NSString*)_feedbackBody
-{
+
+- (NSString *)_feedbackBody {
     NSString *body = [NSString stringWithFormat:@"%@\n\n\nDevice:\n%@\n\niOS:\n%@\n\nApp:\n%@ %@",
                                                 _descriptionTextView.text,
                                                 [self _platformString],
@@ -367,30 +354,25 @@
     return body;
 }
 
-- (NSString*)_selectedTopic
-{
-    return [topics objectAtIndex:(NSUInteger) _selectedTopicsIndex];
+- (NSString *)_selectedTopic {
+    return [topics objectAtIndex:(NSUInteger)_selectedTopicsIndex];
 }
 
-- (NSString*)_selectedTopicToSend
-{
-    return [topicsToSend objectAtIndex:(NSUInteger) _selectedTopicsIndex];
+- (NSString *)_selectedTopicToSend {
+    return [topicsToSend objectAtIndex:(NSUInteger)_selectedTopicsIndex];
 }
 
-- (NSString*)_appName
-{
+- (NSString *)_appName {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:
             @"CFBundleDisplayName"];
 }
 
-- (NSString*)_appVersion
-{
+- (NSString *)_appVersion {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 }
 
 
-- (NSString *) _platformString
-{
+- (NSString *)_platformString {
     return [UIDeviceHardware platformString];
 }
 
