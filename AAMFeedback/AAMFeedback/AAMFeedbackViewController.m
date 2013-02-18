@@ -109,6 +109,13 @@ static NSString * const AAMLocalizableTable = @"AAMLocalizable";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+
+    if (self.backgroundImage != nil) {
+        UIImageView *backgroundImageView = [[[UIImageView alloc] initWithImage:self.backgroundImage] autorelease];
+        self.tableView.backgroundView = backgroundImageView;
+    }
+
 }
 
 - (void)viewDidUnload {
@@ -271,6 +278,10 @@ static NSString * const AAMLocalizableTable = @"AAMLocalizable";
         [_descriptionTextView resignFirstResponder];
 
         AAMFeedbackTopicsViewController *vc = [[[AAMFeedbackTopicsViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+        if (self.backgroundImage != nil) {
+            UIImageView *backgroundImageView = [[[UIImageView alloc] initWithImage:self.backgroundImage] autorelease];
+            vc.tableView.backgroundView = backgroundImageView;
+        }
         vc.delegate = self;
         vc.selectedIndex = _selectedTopicsIndex;
         [self.navigationController pushViewController:vc animated:YES];

@@ -24,6 +24,8 @@
 @property (retain, nonatomic) NSArray *toRecipients;
 @property (retain, nonatomic) NSArray *ccRecipients;
 @property (retain, nonatomic) NSArray *bccRecipients;
+#pragma mark - customize
+@property (retain, nonatomic) UIImage *backgroundImage;
 
 + (BOOL)isAvailable;
 - (id)initWithTopics:(NSArray*)theTopics;
