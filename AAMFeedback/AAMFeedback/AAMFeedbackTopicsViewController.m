@@ -15,7 +15,7 @@ private)
 
 - (NSInteger)_selectedIndex;
 
-- (void)_updateCellselection;
+- (void)_updateCellSelection;
 
 - (NSArray *)_topics;
 @end
@@ -38,7 +38,7 @@ private)
 
 - (void)viewWillAppear:(BOOL) animated {
     [super viewWillAppear:animated];
-    [self _updateCellselection];
+    [self _updateCellSelection];
 }
 
 - (void)viewDidAppear:(BOOL) animated {
@@ -77,7 +77,7 @@ private)
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    NSUInteger row = indexPath.row;
+    NSUInteger row = (NSUInteger)indexPath.row;
     cell.textLabel.text = NSLocalizedString([[self _topics] objectAtIndex:row], nil);
 
     return cell;
@@ -88,7 +88,7 @@ private)
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {
     NSInteger row = indexPath.row;
     [self _setSelectedIndex:row];
-    [self _updateCellselection];
+    [self _updateCellSelection];
 
     if ([delegate respondsToSelector:@selector(feedbackTopicsViewController:didSelectTopicAtIndex:)]) {
         [delegate feedbackTopicsViewController:self didSelectTopicAtIndex:row];
@@ -105,7 +105,7 @@ private)
     _selectedIndex = theIndex;
 }
 
-- (void)_updateCellselection {
+- (void)_updateCellSelection {
     NSArray *cells = [self.tableView visibleCells];
     int n = [cells count];
     for (int i = 0; i < n; i++) {

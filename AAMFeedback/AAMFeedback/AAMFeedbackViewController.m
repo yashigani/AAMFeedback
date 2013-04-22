@@ -41,10 +41,7 @@ private)
 @synthesize bccRecipients;
 
 + (BOOL)isAvailable {
-    if ([MFMailComposeViewController class]) {
-        return YES;
-    }
-    return NO;
+    return [MFMailComposeViewController canSendMail];
 }
 
 - (id)init {
