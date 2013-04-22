@@ -40,13 +40,6 @@ private)
 @synthesize ccRecipients;
 @synthesize bccRecipients;
 
-static NSString * const AAMLocalizableTable = @"AAMLocalizable";
-- (NSBundle *)localizableBundle {
-    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"AAMLocalizable.bundle"];
-    NSBundle *bundle = [NSBundle bundleWithPath:path];
-    return bundle;
-}
-
 + (BOOL)isAvailable {
     if ([MFMailComposeViewController class]) {
         return YES;
@@ -58,20 +51,14 @@ static NSString * const AAMLocalizableTable = @"AAMLocalizable";
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         self.topics = [[[NSArray alloc] initWithObjects:
-                @"AAMFeedbackTopicsQuestion",
-                @"AAMFeedbackTopicsRequest",
-                @"AAMFeedbackTopicsBugReport",
-                @"AAMFeedbackTopicsMedia",
-                @"AAMFeedbackTopicsBusiness",
-                @"AAMFeedbackTopicsOther", nil] autorelease];
+                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsQuestion", @"AAMLocalizable", nil),
+                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsRequest", @"AAMLocalizable", nil),
+                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsBugReport", @"AAMLocalizable", nil),
+                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsMedia", @"AAMLocalizable", nil),
+                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsBusiness", @"AAMLocalizable", nil),
+                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsOther", @"AAMLocalizable", nil), nil] autorelease];
 
-        self.topicsToSend = [[[NSArray alloc] initWithObjects:
-                @"Question",
-                @"Request",
-                @"Bug Report",
-                @"Media",
-                @"Business",
-                @"Other", nil] autorelease];
+        self.topicsToSend = [[self.topics copy] autorelease];
     }
     return self;
 }
@@ -101,10 +88,10 @@ static NSString * const AAMLocalizableTable = @"AAMLocalizable";
 - (void)loadView {
     [super loadView];
 
-    self.title = NSLocalizedStringFromTableInBundle(@"AAMFeedbackTitle", AAMLocalizableTable, [self localizableBundle], nil);
+    self.title = NSLocalizedStringFromTable(@"AAMFeedbackTitle", @"AAMLocalizable", nil);
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDidPress:)] autorelease];
 
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"AAMFeedbackButtonMail", AAMLocalizableTable, [self localizableBundle], nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"AAMFeedbackButtonMail", @"AAMLocalizable", nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)] autorelease];
 }
 
 - (void)viewDidLoad {
@@ -174,10 +161,10 @@ static NSString * const AAMLocalizableTable = @"AAMLocalizable";
 - (NSString *)tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger) section {
     switch (section) {
         case 0:
-            return NSLocalizedStringFromTableInBundle(@"AAMFeedbackTableHeaderTopics", AAMLocalizableTable, [self localizableBundle], nil);
+            return NSLocalizedStringFromTable(@"AAMFeedbackTableHeaderTopics", @"AAMLocalizable", nil);
             break;
         case 1:
-            return NSLocalizedStringFromTableInBundle(@"AAMFeedbackTableHeaderBasicInfo", AAMLocalizableTable, [self localizableBundle], nil);
+            return NSLocalizedStringFromTable(@"AAMFeedbackTableHeaderBasicInfo", @"AAMLocalizable", nil);
             break;
         default:
             break;
@@ -213,7 +200,7 @@ static NSString * const AAMLocalizableTable = @"AAMLocalizable";
 
                 _descriptionPlaceHolder = [[[UITextField alloc] initWithFrame:CGRectMake(16, 8, 300, 20)] autorelease];
                 _descriptionPlaceHolder.font = [UIFont systemFontOfSize:16];
-                _descriptionPlaceHolder.placeholder = NSLocalizedStringFromTableInBundle(@"AAMFeedbackDescriptionPlaceholder", AAMLocalizableTable, [self localizableBundle], nil);
+                _descriptionPlaceHolder.placeholder = NSLocalizedStringFromTable(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", nil);
                 _descriptionPlaceHolder.userInteractionEnabled = NO;
                 [cell.contentView addSubview:_descriptionPlaceHolder];
 
@@ -228,8 +215,8 @@ static NSString * const AAMLocalizableTable = @"AAMLocalizable";
             switch (indexPath.row) {
                 case 0:
 
-                    cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsTitle", AAMLocalizableTable, [self localizableBundle], nil);
-                    cell.detailTextLabel.text = NSLocalizedStringFromTableInBundle([self _selectedTopic], AAMLocalizableTable, [self localizableBundle], nil);
+                    cell.textLabel.text = NSLocalizedStringFromTable(@"AAMFeedbackTopicsTitle", @"AAMLocalizable", nil);
+                    cell.detailTextLabel.text = NSLocalizedStringFromTable([self _selectedTopic], @"AAMLocalizable", nil);
                     break;
                 case 1:
                 default:
@@ -322,13 +309,14 @@ static NSString * const AAMLocalizableTable = @"AAMLocalizable";
 }
 
 
-- (void)mailComposeController:(MFMailComposeViewController *) controller didFinishWithResult:(MFMailComposeResult) result error:(NSError *) error {
+- (void)mailComposeController:(MFMailComposeViewController *) controller
+          didFinishWithResult:(MFMailComposeResult) result error:(NSError *) error {
     if (result == MFMailComposeResultCancelled) {
     } else if (result == MFMailComposeResultSent) {
         _isFeedbackSent = YES;
     } else if (result == MFMailComposeResultFailed) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"AAMFeedbackMailDidFinishWithError"
-                                                       delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+                                                                    delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
         [alert release];
     }
@@ -336,7 +324,8 @@ static NSString * const AAMLocalizableTable = @"AAMLocalizable";
 }
 
 
-- (void)feedbackTopicsViewController:(AAMFeedbackTopicsViewController *) feedbackTopicsViewController didSelectTopicAtIndex:(NSInteger) selectedIndex {
+- (void)feedbackTopicsViewController:(AAMFeedbackTopicsViewController *) feedbackTopicsViewController
+               didSelectTopicAtIndex:(NSInteger) selectedIndex {
     _selectedTopicsIndex = selectedIndex;
 }
 
@@ -375,7 +364,7 @@ static NSString * const AAMLocalizableTable = @"AAMLocalizable";
 
 - (NSString *)_appName {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:
-            @"CFBundleDisplayName"];
+                                                       @"CFBundleDisplayName"];
 }
 
 - (NSString *)_appVersion {
