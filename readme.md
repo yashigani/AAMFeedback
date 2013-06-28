@@ -2,6 +2,8 @@
 
 Simple Feedback library
 
+![screenshot](http://take.ms/Z8EJCz)
+
 ## Installation
 
 
