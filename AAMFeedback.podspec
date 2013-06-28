@@ -11,4 +11,5 @@ Pod::Spec.new do |s|
   s.resources = 'AAMFeedback/AAMFeedback/*.lproj'
   s.framework = 'MessageUI'
   s.dependency 'UIDeviceIdentifier'
+  s.requires_arc = true
 end
