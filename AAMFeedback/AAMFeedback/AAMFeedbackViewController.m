@@ -47,15 +47,15 @@ private)
 - (id)init {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
-        self.topics = [[[NSArray alloc] initWithObjects:
+        self.topics = [[NSArray alloc] initWithObjects:
                                             NSLocalizedStringFromTable(@"AAMFeedbackTopicsQuestion", @"AAMLocalizable", nil),
                                             NSLocalizedStringFromTable(@"AAMFeedbackTopicsRequest", @"AAMLocalizable", nil),
                                             NSLocalizedStringFromTable(@"AAMFeedbackTopicsBugReport", @"AAMLocalizable", nil),
                                             NSLocalizedStringFromTable(@"AAMFeedbackTopicsMedia", @"AAMLocalizable", nil),
                                             NSLocalizedStringFromTable(@"AAMFeedbackTopicsBusiness", @"AAMLocalizable", nil),
-                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsOther", @"AAMLocalizable", nil), nil] autorelease];
+                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsOther", @"AAMLocalizable", nil), nil];
 
-        self.topicsToSend = [[self.topics copy] autorelease];
+        self.topicsToSend = [self.topics copy];
     }
     return self;
 }
@@ -69,15 +69,6 @@ private)
     return self;
 }
 
-- (void)dealloc {
-    self.descriptionText = nil;
-    self.topics = nil;
-    self.topicsToSend = nil;
-    self.toRecipients = nil;
-    self.ccRecipients = nil;
-    self.bccRecipients = nil;
-    [super dealloc];
-}
 
 
 #pragma mark - View lifecycle
@@ -86,9 +77,9 @@ private)
     [super loadView];
 
     self.title = NSLocalizedStringFromTable(@"AAMFeedbackTitle", @"AAMLocalizable", nil);
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDidPress:)] autorelease];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDidPress:)];
 
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"AAMFeedbackButtonMail", @"AAMLocalizable", nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"AAMFeedbackButtonMail", @"AAMLocalizable", nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)];
 }
 
 - (void)viewDidLoad {
@@ -96,7 +87,7 @@ private)
 
 
     if (self.backgroundImage != nil) {
-        UIImageView *backgroundImageView = [[[UIImageView alloc] initWithImage:self.backgroundImage] autorelease];
+        UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:self.backgroundImage];
         self.tableView.backgroundView = backgroundImageView;
     }
 
@@ -176,18 +167,18 @@ private)
     if (cell == nil) {
         if (indexPath.section == 1) {
             //General Infos
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         } else {
             if (indexPath.row == 0) {
                 //Topics
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             } else {
                 //Topics Description
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                _descriptionTextView = [[[UITextView alloc] initWithFrame:CGRectMake(10, 0, 300, 88)] autorelease];
+                _descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, 300, 88)];
                 _descriptionTextView.backgroundColor = [UIColor clearColor];
                 _descriptionTextView.font = [UIFont systemFontOfSize:16];
                 _descriptionTextView.delegate = self;
@@ -195,7 +186,7 @@ private)
                 _descriptionTextView.text = self.descriptionText;
                 [cell.contentView addSubview:_descriptionTextView];
 
-                _descriptionPlaceHolder = [[[UITextField alloc] initWithFrame:CGRectMake(16, 8, 300, 20)] autorelease];
+                _descriptionPlaceHolder = [[UITextField alloc] initWithFrame:CGRectMake(16, 8, 300, 20)];
                 _descriptionPlaceHolder.font = [UIFont systemFontOfSize:16];
                 _descriptionPlaceHolder.placeholder = NSLocalizedStringFromTable(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", nil);
                 _descriptionPlaceHolder.userInteractionEnabled = NO;
@@ -261,9 +252,9 @@ private)
     if (indexPath.section == 0 && indexPath.row == 0) {
         [_descriptionTextView resignFirstResponder];
 
-        AAMFeedbackTopicsViewController *vc = [[[AAMFeedbackTopicsViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+        AAMFeedbackTopicsViewController *vc = [[AAMFeedbackTopicsViewController alloc] initWithStyle:UITableViewStyleGrouped];
         if (self.backgroundImage != nil) {
-            UIImageView *backgroundImageView = [[[UIImageView alloc] initWithImage:self.backgroundImage] autorelease];
+            UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:self.backgroundImage];
             vc.tableView.backgroundView = backgroundImageView;
         }
         vc.delegate = self;
@@ -289,7 +280,6 @@ private)
     [picker setSubject:[self _feedbackSubject]];
     [picker setMessageBody:[self _feedbackBody] isHTML:NO];
     [self presentModalViewController:picker animated:YES];
-    [picker release];
 }
 
 
@@ -315,7 +305,6 @@ private)
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"AAMFeedbackMailDidFinishWithError"
                                                                     delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
-        [alert release];
     }
     [controller dismissModalViewControllerAnimated:YES];
 }

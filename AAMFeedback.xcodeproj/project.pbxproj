@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		17B5C01043A17CF6DA59FC35 /* AAMLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B5CC5C99915597FBF4FE0D /* AAMLocalizable.strings */; };
 		17B5C0723A26BE7674700A54 /* AAMLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B5C255524CD8278AF05FAB /* AAMLocalizable.strings */; };
+		17B5CF1701433D2E2915F7CE /* FeedbackTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B5CD2D93C20C111AC25B07 /* FeedbackTableViewController.m */; };
 		3D02636314861E3700FBC566 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D02636214861E3700FBC566 /* UIKit.framework */; };
 		3D02636514861E3700FBC566 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D02636414861E3700FBC566 /* Foundation.framework */; };
 		3D02636714861E3700FBC566 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D02636614861E3700FBC566 /* CoreGraphics.framework */; };
@@ -24,6 +25,7 @@
 		3D0263A514861EE800FBC566 /* AAMFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0263A314861EE800FBC566 /* AAMFeedbackViewController.m */; };
 		3D0263B014861F7100FBC566 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0263AF14861F7100FBC566 /* MessageUI.framework */; };
 		3D0263B91486213100FBC566 /* AAMLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D0263B71486213100FBC566 /* AAMLocalizable.strings */; };
+		7386D148177D5C78003A3971 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7386D147177D5C78003A3971 /* Storyboard.storyboard */; };
 		BFD9F2F0404F49DC961DF2D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 051A7CE4E958428784BEC091 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +43,9 @@
 		051A7CE4E958428784BEC091 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B5C381A98A914B625AEF2F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		17B5C38B6069ED6866C9C8B3 /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = AAMLocalizable.strings; sourceTree = "<group>"; };
+		17B5C6B5FED237AD2069B8A4 /* FeedbackTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackTableViewController.h; sourceTree = "<group>"; };
 		17B5C8DD1936E5FE45D74E45 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = AAMLocalizable.strings; sourceTree = "<group>"; };
+		17B5CD2D93C20C111AC25B07 /* FeedbackTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackTableViewController.m; sourceTree = "<group>"; };
 		3D02635E14861E3700FBC566 /* AAMFeedback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAMFeedback.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D02636214861E3700FBC566 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3D02636414861E3700FBC566 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -64,6 +68,7 @@
 		3D0263A214861EE800FBC566 /* AAMFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAMFeedbackViewController.h; sourceTree = "<group>"; };
 		3D0263A314861EE800FBC566 /* AAMFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAMFeedbackViewController.m; sourceTree = "<group>"; };
 		3D0263AF14861F7100FBC566 /* MessageUI.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		7386D147177D5C78003A3971 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		8A159C9CADF643BC9BCA3426 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -203,6 +208,9 @@
 				3D02637214861E3800FBC566 /* AppDelegate.m */,
 				3D02637414861E3800FBC566 /* ViewController.h */,
 				3D02637514861E3800FBC566 /* ViewController.m */,
+				7386D147177D5C78003A3971 /* Storyboard.storyboard */,
+				17B5CD2D93C20C111AC25B07 /* FeedbackTableViewController.m */,
+				17B5C6B5FED237AD2069B8A4 /* FeedbackTableViewController.h */,
 			);
 			name = SampleCode;
 			sourceTree = "<group>";
@@ -283,6 +291,7 @@
 				3D0263B91486213100FBC566 /* AAMLocalizable.strings in Resources */,
 				17B5C0723A26BE7674700A54 /* AAMLocalizable.strings in Resources */,
 				17B5C01043A17CF6DA59FC35 /* AAMLocalizable.strings in Resources */,
+				7386D148177D5C78003A3971 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +345,7 @@
 				3D02637614861E3800FBC566 /* ViewController.m in Sources */,
 				3D0263A414861EE800FBC566 /* AAMFeedbackTopicsViewController.m in Sources */,
 				3D0263A514861EE800FBC566 /* AAMFeedbackViewController.m in Sources */,
+				17B5CF1701433D2E2915F7CE /* FeedbackTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8A159C9CADF643BC9BCA3426 /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AAMFeedback/AAMFeedback-Prefix.pch";
 				INFOPLIST_FILE = "AAMFeedback/AAMFeedback-Info.plist";
@@ -453,6 +464,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8A159C9CADF643BC9BCA3426 /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AAMFeedback/AAMFeedback-Prefix.pch";
 				INFOPLIST_FILE = "AAMFeedback/AAMFeedback-Info.plist";
