@@ -10,8 +10,7 @@
 #import "AAMFeedbackTopicsViewController.h"
 #import "UIDeviceHardware.h"
 
-@interface AAMFeedbackViewController (
-private)
+@interface AAMFeedbackViewController ()
 
 - (NSString *)_platformString;
 
@@ -33,29 +32,14 @@ private)
 
 @implementation AAMFeedbackViewController
 
-@synthesize descriptionText;
-@synthesize topics;
-@synthesize topicsToSend;
-@synthesize toRecipients;
-@synthesize ccRecipients;
-@synthesize bccRecipients;
-
 + (BOOL)isAvailable {
     return [MFMailComposeViewController canSendMail];
 }
 
-- (id)init {
+- (id)initWithStyle:(UITableViewStyle) style {
     self = [super initWithStyle:UITableViewStyleGrouped];
-    if (self) {
-        self.topics = [[NSArray alloc] initWithObjects:
-                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsQuestion", @"AAMLocalizable", nil),
-                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsRequest", @"AAMLocalizable", nil),
-                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsBugReport", @"AAMLocalizable", nil),
-                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsMedia", @"AAMLocalizable", nil),
-                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsBusiness", @"AAMLocalizable", nil),
-                                            NSLocalizedStringFromTable(@"AAMFeedbackTopicsOther", @"AAMLocalizable", nil), nil];
-
-        self.topicsToSend = [self.topics copy];
+    if (self == nil) {
+        return nil;
     }
     return self;
 }
@@ -77,13 +61,26 @@ private)
     [super loadView];
 
     self.title = NSLocalizedStringFromTable(@"AAMFeedbackTitle", @"AAMLocalizable", nil);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDidPress:)];
-
+    BOOL isModal = (self.presentingViewController != nil);
+    if (isModal) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDidPress:)];
+    }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"AAMFeedbackButtonMail", @"AAMLocalizable", nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.topics = @[
+        NSLocalizedStringFromTable(@"AAMFeedbackTopicsQuestion", @"AAMLocalizable", nil),
+        NSLocalizedStringFromTable(@"AAMFeedbackTopicsRequest", @"AAMLocalizable", nil),
+        NSLocalizedStringFromTable(@"AAMFeedbackTopicsBugReport", @"AAMLocalizable", nil),
+        NSLocalizedStringFromTable(@"AAMFeedbackTopicsMedia", @"AAMLocalizable", nil),
+        NSLocalizedStringFromTable(@"AAMFeedbackTopicsBusiness", @"AAMLocalizable", nil),
+        NSLocalizedStringFromTable(@"AAMFeedbackTopicsOther", @"AAMLocalizable", nil)
+    ];
+
+    self.topicsToSend = [self.topics copy];
 
 
     if (self.backgroundImage != nil) {
@@ -150,10 +147,8 @@ private)
     switch (section) {
         case 0:
             return NSLocalizedStringFromTable(@"AAMFeedbackTableHeaderTopics", @"AAMLocalizable", nil);
-            break;
         case 1:
             return NSLocalizedStringFromTable(@"AAMFeedbackTableHeaderBasicInfo", @"AAMLocalizable", nil);
-            break;
         default:
             break;
     }
@@ -178,7 +173,8 @@ private)
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                _descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, 300, 88)];
+                _descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, 300,
+                    88)];
                 _descriptionTextView.backgroundColor = [UIColor clearColor];
                 _descriptionTextView.font = [UIFont systemFontOfSize:16];
                 _descriptionTextView.delegate = self;
@@ -186,7 +182,8 @@ private)
                 _descriptionTextView.text = self.descriptionText;
                 [cell.contentView addSubview:_descriptionTextView];
 
-                _descriptionPlaceHolder = [[UITextField alloc] initWithFrame:CGRectMake(16, 8, 300, 20)];
+                _descriptionPlaceHolder = [[UITextField alloc] initWithFrame:CGRectMake(16, 8, 300,
+                    20)];
                 _descriptionPlaceHolder.font = [UIFont systemFontOfSize:16];
                 _descriptionPlaceHolder.placeholder = NSLocalizedStringFromTable(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", nil);
                 _descriptionPlaceHolder.userInteractionEnabled = NO;
@@ -251,15 +248,15 @@ private)
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {
     if (indexPath.section == 0 && indexPath.row == 0) {
         [_descriptionTextView resignFirstResponder];
-
-        AAMFeedbackTopicsViewController *vc = [[AAMFeedbackTopicsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        AAMFeedbackTopicsViewController *topicsViewController = [[AAMFeedbackTopicsViewController alloc] initWithStyle:UITableViewStyleGrouped];
         if (self.backgroundImage != nil) {
             UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:self.backgroundImage];
-            vc.tableView.backgroundView = backgroundImageView;
+            topicsViewController.tableView.backgroundView = backgroundImageView;
         }
-        vc.delegate = self;
-        vc.selectedIndex = _selectedTopicsIndex;
-        [self.navigationController pushViewController:vc animated:YES];
+        topicsViewController.topics = [self.topics copy];
+        topicsViewController.delegate = self;
+        topicsViewController.selectedIndex = _selectedTopicsIndex;
+        [self.navigationController pushViewController:topicsViewController animated:YES];
     }
 }
 
@@ -341,20 +338,19 @@ private)
 }
 
 - (NSString *)_selectedTopic {
-    return [topics objectAtIndex:(NSUInteger)_selectedTopicsIndex];
+    return (self.topics)[(NSUInteger)_selectedTopicsIndex];
 }
 
 - (NSString *)_selectedTopicToSend {
-    return [topicsToSend objectAtIndex:(NSUInteger)_selectedTopicsIndex];
+    return (self.topicsToSend)[(NSUInteger)_selectedTopicsIndex];
 }
 
 - (NSString *)_appName {
-    return [[[NSBundle mainBundle] infoDictionary] objectForKey:
-                                                       @"CFBundleDisplayName"];
+    return [[NSBundle mainBundle] infoDictionary][@"CFBundleDisplayName"];
 }
 
 - (NSString *)_appVersion {
-    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    return [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
 }
 
 

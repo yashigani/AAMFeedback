@@ -9,23 +9,14 @@
 #import "AAMFeedbackTopicsViewController.h"
 
 
-@interface AAMFeedbackTopicsViewController (
-private)
-- (void)_setSelectedIndex:(int) theIndex;
-
-- (NSInteger)_selectedIndex;
+@interface AAMFeedbackTopicsViewController ()
 
 - (void)_updateCellSelection;
 
-- (NSArray *)_topics;
 @end
 
 
 @implementation AAMFeedbackTopicsViewController
-
-@synthesize delegate;
-@synthesize selectedIndex = _selectedIndex;
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,15 +50,8 @@ private)
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *) tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section {
-    if (delegate) {
-        return [[self _topics] count];
-    }
-    return 1;
+    return [self.topics count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
@@ -78,7 +62,7 @@ private)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSUInteger row = (NSUInteger)indexPath.row;
-    cell.textLabel.text = NSLocalizedString([[self _topics] objectAtIndex:row], nil);
+    cell.textLabel.text = NSLocalizedString((self.topics)[row], nil);
 
     return cell;
 }
@@ -87,34 +71,25 @@ private)
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {
     NSInteger row = indexPath.row;
-    [self _setSelectedIndex:row];
+    self.selectedIndex = row;
     [self _updateCellSelection];
 
-    if ([delegate respondsToSelector:@selector(feedbackTopicsViewController:didSelectTopicAtIndex:)]) {
-        [delegate feedbackTopicsViewController:self didSelectTopicAtIndex:row];
+    if ([self.delegate respondsToSelector:@selector(feedbackTopicsViewController:didSelectTopicAtIndex:)]) {
+        [self.delegate feedbackTopicsViewController:self didSelectTopicAtIndex:row];
     }
 }
 
 #pragma mark - Internal
-
-- (NSInteger)_selectedIndex {
-    return _selectedIndex;
-}
-
-- (void)_setSelectedIndex:(NSInteger) theIndex; {
-    _selectedIndex = theIndex;
-}
-
 - (void)_updateCellSelection {
     NSArray *cells = [self.tableView visibleCells];
     int n = [cells count];
     for (int i = 0; i < n; i++) {
-        UITableViewCell *cell = [cells objectAtIndex:i];
+        UITableViewCell *cell = cells[(NSUInteger)i];
         cell.textLabel.textColor = [UIColor blackColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
 
-    NSIndexPath *path = [NSIndexPath indexPathForRow:[self _selectedIndex] inSection:0];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:self.selectedIndex inSection:0];
 
     UITableViewCell *cell;
     cell = [self.tableView cellForRowAtIndexPath:path];
@@ -123,7 +98,4 @@ private)
     [cell setSelected:NO animated:YES];
 }
 
-- (NSArray *)_topics {
-    return (NSArray *)[delegate performSelector:@selector(topics)];
-}
 @end

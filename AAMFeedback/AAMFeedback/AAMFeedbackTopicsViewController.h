@@ -9,16 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @interface AAMFeedbackTopicsViewController : UITableViewController {
-    NSInteger _selectedIndex;
 }
 
-@property (weak, nonatomic) id delegate;
-@property (assign, nonatomic) NSInteger selectedIndex;
+@property(weak, nonatomic) id delegate;
+@property NSInteger selectedIndex;
+@property(nonatomic, strong) NSArray *topics;
 
 @end
 
-@protocol AAMFeedbackTopicsViewControllerDelegate<NSObject>
+@protocol AAMFeedbackTopicsViewControllerDelegate <NSObject>
 
-- (void)feedbackTopicsViewController:(AAMFeedbackTopicsViewController *)feedbackTopicsViewController didSelectTopicAtIndex:(NSInteger)selectedIndex;
+- (void)feedbackTopicsViewController:(AAMFeedbackTopicsViewController *) feedbackTopicsViewController didSelectTopicAtIndex:(NSInteger) selectedIndex;
 
 @end

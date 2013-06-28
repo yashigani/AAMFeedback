@@ -14,7 +14,7 @@
     [super viewDidLoad];
     // inherit AAMFeedbackViewController
     // initialize setting
-    self.toRecipients = [NSArray arrayWithObject:@"YOUR_CONTACT@email.com"];
+    self.toRecipients = @[@"YOUR_CONTACT@email.com"];
     self.ccRecipients = nil;
     self.bccRecipients = nil;
 }

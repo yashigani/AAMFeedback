@@ -14,7 +14,7 @@
 
 - (IBAction)handleOpenAsModal:(id) sender {
     AAMFeedbackViewController *vc = [[AAMFeedbackViewController alloc] init];
-    vc.toRecipients = [NSArray arrayWithObject:@"YOUR_CONTACT@email.com"];
+    vc.toRecipients = @[@"YOUR_CONTACT@email.com"];
     vc.ccRecipients = nil;
     vc.bccRecipients = nil;
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
