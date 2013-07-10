@@ -81,14 +81,22 @@
     ];
 
     self.topicsToSend = [self.topics copy];
+    [self updateBackGroundImage];
 
+}
 
+- (void)setBackgroundImage:(UIImage *) backgroundImage {
+    _backgroundImage = backgroundImage;
+    [self updateBackGroundImage];
+}
+
+- (void)updateBackGroundImage {
     if (self.backgroundImage != nil) {
         UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:self.backgroundImage];
         self.tableView.backgroundView = backgroundImageView;
     }
-
 }
+
 
 - (void)viewDidUnload {
     [super viewDidUnload];
