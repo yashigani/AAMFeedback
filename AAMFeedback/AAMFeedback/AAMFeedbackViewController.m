@@ -87,7 +87,9 @@
 
 - (void)setBackgroundImage:(UIImage *) backgroundImage {
     _backgroundImage = backgroundImage;
-    [self updateBackGroundImage];
+    if ([self isViewLoaded]) {
+        [self updateBackGroundImage];
+    }
 }
 
 - (void)updateBackGroundImage {
