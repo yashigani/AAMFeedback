@@ -30,7 +30,6 @@ See ``FeedbackTableViewController`` for details.
 ## Difference from original [fladdict/AAMFeedback](https://github.com/fladdict/AAMFeedback "fladdict/AAMFeedback")
 
 * **ARC**ed.
-* 
 * Device information is defined by the use of [squarefrog/UIDeviceIdentifier](https://github.com/squarefrog/UIDeviceIdentifier "squarefrog/UIDeviceIdentifier").
 * Custom BackgroundImage/Topics
 * Added spanish locale.(thanks @ericertl)
