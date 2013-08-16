@@ -1,13 +1,13 @@
 # AAMFeedback
 
-Simple Feedback library
+Simple Feedback library, forked form [fladdict/AAMFeedback](https://github.com/fladdict/AAMFeedback "fladdict/AAMFeedback").
 
 ![screenshot](http://f.cl.ly/items/291A0A2u0R2B3u3V0b3H/screenshot.png)
 
 ## Installation
 
 
-	pod 'AAMFeedback', :podspec => 'https://raw.github.com/azu/AAMFeedback/master/AAMFeedback.podspec'
+	pod 'AAMFeedback', :git => 'https://github.com/azu/AAMFeedback.git'
 
 
 ## Usage
@@ -23,9 +23,17 @@ UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewCo
 [self presentModalViewController:nvc animated:YES];
 ```
 
-also able to UITableViewController Subclass
+also be able to UITableViewController Subclass.
 
-see ``FeedbackTableViewController`` 
+See ``FeedbackTableViewController`` for details.
+
+## Difference from original [fladdict/AAMFeedback](https://github.com/fladdict/AAMFeedback "fladdict/AAMFeedback")
+
+* **ARC**ed.
+* 
+* Device information is defined by the use of [squarefrog/UIDeviceIdentifier](https://github.com/squarefrog/UIDeviceIdentifier "squarefrog/UIDeviceIdentifier").
+* Custom BackgroundImage/Topics
+* Added spanish locale.(thanks @ericertl)
 
 ## Contributing
 
