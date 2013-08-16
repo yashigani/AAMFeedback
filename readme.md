@@ -2,7 +2,7 @@
 
 Simple Feedback library
 
-![screenshot](http://take.ms/Z8EJCz)
+![screenshot](http://f.cl.ly/items/291A0A2u0R2B3u3V0b3H/screenshot.png)
 
 ## Installation
 
