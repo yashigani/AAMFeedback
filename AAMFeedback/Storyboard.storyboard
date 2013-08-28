@@ -19,10 +19,10 @@
             </objects>
             <point key="canvasLocation" x="-545" y="452"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller - ViewController-->
         <scene sceneID="hRm-Qy-RB8">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="saz-9P-YiD" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" title="ViewController" id="saz-9P-YiD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gC9-JA-5n2">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

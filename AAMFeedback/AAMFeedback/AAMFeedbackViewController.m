@@ -273,7 +273,7 @@
 
 
 - (void)cancelDidPress:(id) sender {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)nextDidPress:(id) sender {
@@ -314,7 +314,7 @@
                                                                     delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
     }
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 

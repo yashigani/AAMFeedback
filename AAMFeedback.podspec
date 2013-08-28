@@ -7,6 +7,7 @@ Pod::Spec.new do |s|
   s.license  = { :type => 'BSD', :file => 'LICENSE' }
   s.source   = { :git => 'https://github.com/azu/AAMFeedback.git' }
   s.platform = :ios
+  s.ios.deployment_target = '5.0'
   s.source_files = 'AAMFeedback/AAMFeedback/*.{h,m}'
   s.resources = 'AAMFeedback/AAMFeedback/*.lproj'
   s.framework = 'MessageUI'
