@@ -27,10 +27,12 @@
 @property (strong, nonatomic) UIImage *backgroundImage;
 @property (assign, nonatomic) NSInteger selectedTopicsIndex;
 
-+ (BOOL)isAvailable;
-
 - (instancetype)initWithTopics:(NSArray*)theTopics;
 
++ (BOOL)isAvailable;
+
++ (void)setAlwaysUseMainBundle:(BOOL) alwaysUseMainBundle;
 #pragma mark - internal
+
 + (NSBundle *)bundle;
 @end
