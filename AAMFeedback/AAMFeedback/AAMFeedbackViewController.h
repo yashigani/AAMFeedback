@@ -29,7 +29,7 @@
 
 + (BOOL)isAvailable;
 
-- (id)initWithTopics:(NSArray*)theTopics;
+- (instancetype)initWithTopics:(NSArray*)theTopics;
 
 #pragma mark - internal
 + (NSBundle *)bundle;
