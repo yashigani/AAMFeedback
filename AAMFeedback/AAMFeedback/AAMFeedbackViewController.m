@@ -303,15 +303,15 @@ static BOOL _alwaysUseMainBundle = NO;
 - (void)nextDidPress:(id) sender {
     [_descriptionTextView resignFirstResponder];
 
-    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-    picker.mailComposeDelegate = self;
-    [picker setToRecipients:self.toRecipients];
-    [picker setCcRecipients:self.ccRecipients];
-    [picker setBccRecipients:self.bccRecipients];
+    MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
+    mailComposeViewController.mailComposeDelegate = self;
+    [mailComposeViewController setToRecipients:self.toRecipients];
+    [mailComposeViewController setCcRecipients:self.ccRecipients];
+    [mailComposeViewController setBccRecipients:self.bccRecipients];
 
-    [picker setSubject:[self _feedbackSubject]];
-    [picker setMessageBody:[self _feedbackBody] isHTML:NO];
-    [self presentModalViewController:picker animated:YES];
+    [mailComposeViewController setSubject:[self _feedbackSubject]];
+    [mailComposeViewController setMessageBody:[self _feedbackBody] isHTML:NO];
+    [self presentViewController:mailComposeViewController animated:YES completion:nil];
 }
 
 

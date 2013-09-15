@@ -19,8 +19,8 @@ AAMFeedbackViewController *vc = [[AAMFeedbackViewController alloc] init];
 vc.toRecipients = @[@"YOUR_CONTACT@email.com"];
 vc.ccRecipients = nil;
 vc.bccRecipients = nil;
-UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-[self presentModalViewController:nvc animated:YES];
+UINavigationController *feedbackNavigation = [[UINavigationController alloc] initWithRootViewController:vc];
+[self presentViewController:feedbackNavigation animated:YES completion:nil];
 ```
 
 also be able to UITableViewController Subclass.
