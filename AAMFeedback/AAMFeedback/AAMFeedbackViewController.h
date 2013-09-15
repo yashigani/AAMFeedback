@@ -28,6 +28,9 @@
 @property (assign, nonatomic) NSInteger selectedTopicsIndex;
 
 + (BOOL)isAvailable;
+
 - (id)initWithTopics:(NSArray*)theTopics;
 
+#pragma mark - internal
++ (NSBundle *)bundle;
 @end

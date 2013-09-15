@@ -10,6 +10,9 @@
 #import "AAMFeedbackTopicsViewController.h"
 #import "UIDeviceHardware.h"
 
+// Localizable bundle
+static BOOL _alwaysUseMainBundle = NO;
+
 @interface AAMFeedbackViewController ()
 
 - (NSString *)_platformString;
@@ -53,6 +56,27 @@
     return self;
 }
 
++ (void)setAlwaysUseMainBundle:(BOOL) alwaysUseMainBundle {
+    _alwaysUseMainBundle = alwaysUseMainBundle;
+}
+
++ (NSBundle *)bundle {
+    NSBundle *bundle;
+    if (_alwaysUseMainBundle) {
+        bundle = [NSBundle mainBundle];
+    } else {
+        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"AAMFeedback" withExtension:@"bundle"];
+        if (bundleURL) {
+            // AAMFeedback.bundle will likely only exist when used via CocoaPods
+            bundle = [NSBundle bundleWithURL:bundleURL];
+        } else {
+            bundle = [NSBundle mainBundle];
+        }
+    }
+
+    return bundle;
+}
+
 
 
 #pragma mark - View lifecycle
@@ -60,12 +84,12 @@
 - (void)loadView {
     [super loadView];
 
-    self.title = NSLocalizedStringFromTable(@"AAMFeedbackTitle", @"AAMLocalizable", nil);
+    self.title = NSLocalizedStringFromTableInBundle(@"AAMFeedbackTitle", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
     BOOL isModal = (self.presentingViewController != nil);
     if (isModal) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDidPress:)];
     }
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"AAMFeedbackButtonMail", @"AAMLocalizable", nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"AAMFeedbackButtonMail", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)];
 }
 
 - (void)viewDidLoad {
@@ -73,13 +97,13 @@
 
     if (self.topics == nil) {
         self.topics = @[
-                        NSLocalizedStringFromTable(@"AAMFeedbackTopicsQuestion", @"AAMLocalizable", nil),
-                        NSLocalizedStringFromTable(@"AAMFeedbackTopicsRequest", @"AAMLocalizable", nil),
-                        NSLocalizedStringFromTable(@"AAMFeedbackTopicsBugReport", @"AAMLocalizable", nil),
-                        NSLocalizedStringFromTable(@"AAMFeedbackTopicsMedia", @"AAMLocalizable", nil),
-                        NSLocalizedStringFromTable(@"AAMFeedbackTopicsBusiness", @"AAMLocalizable", nil),
-                        NSLocalizedStringFromTable(@"AAMFeedbackTopicsOther", @"AAMLocalizable", nil)
-                        ];
+            NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsQuestion", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil),
+            NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsRequest", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil),
+            NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsBugReport", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil),
+            NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsMedia", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil),
+            NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsBusiness", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil),
+            NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsOther", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil)
+        ];
     }
 
     self.topicsToSend = [self.topics copy];
@@ -157,9 +181,9 @@
 - (NSString *)tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger) section {
     switch (section) {
         case 0:
-            return NSLocalizedStringFromTable(@"AAMFeedbackTableHeaderTopics", @"AAMLocalizable", nil);
+            return NSLocalizedStringFromTableInBundle(@"AAMFeedbackTableHeaderTopics", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
         case 1:
-            return NSLocalizedStringFromTable(@"AAMFeedbackTableHeaderBasicInfo", @"AAMLocalizable", nil);
+            return NSLocalizedStringFromTableInBundle(@"AAMFeedbackTableHeaderBasicInfo", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
         default:
             break;
     }
@@ -196,7 +220,7 @@
                 _descriptionPlaceHolder = [[UITextField alloc] initWithFrame:CGRectMake(16, 8, 300,
                     20)];
                 _descriptionPlaceHolder.font = [UIFont systemFontOfSize:16];
-                _descriptionPlaceHolder.placeholder = NSLocalizedStringFromTable(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", nil);
+                _descriptionPlaceHolder.placeholder = NSLocalizedStringFromTableInBundle(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
                 _descriptionPlaceHolder.userInteractionEnabled = NO;
                 [cell.contentView addSubview:_descriptionPlaceHolder];
 
@@ -211,8 +235,8 @@
             switch (indexPath.row) {
                 case 0:
 
-                    cell.textLabel.text = NSLocalizedStringFromTable(@"AAMFeedbackTopicsTitle", @"AAMLocalizable", nil);
-                    cell.detailTextLabel.text = NSLocalizedStringFromTable([self _selectedTopic], @"AAMLocalizable", nil);
+                    cell.textLabel.text = NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsTitle", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
+                    cell.detailTextLabel.text = NSLocalizedStringFromTableInBundle([self _selectedTopic], @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
                     break;
                 case 1:
                 default:
@@ -310,7 +334,7 @@
     } else if (result == MFMailComposeResultSent) {
         _isFeedbackSent = YES;
     } else if (result == MFMailComposeResultFailed) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"AAMFeedbackMailDidFinishWithError"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedStringFromTableInBundle(@"AAMFeedbackMailDidFinishWithError", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil)
                                                                     delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
     }

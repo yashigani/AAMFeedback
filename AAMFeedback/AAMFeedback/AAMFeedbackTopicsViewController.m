@@ -2,11 +2,12 @@
 //  AAMFeedbackTopicsViewController.m
 //  AAMFeedbackViewController
 //
-//  Created by 深津 貴之 on 11/11/30.
+//  Original Created by 深津 貴之 on 11/11/30.
 //  Copyright (c) 2011年 Art & Mobile. All rights reserved.
 //
 
 #import "AAMFeedbackTopicsViewController.h"
+#import "AAMFeedbackViewController.h"
 
 
 @interface AAMFeedbackTopicsViewController ()
@@ -20,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = NSLocalizedStringFromTable(@"AAMFeedbackTopicsTitle", @"AAMLocalizable", nil);
+    self.title = NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsTitle",  @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
 }
 
 - (void)viewDidUnload {
@@ -62,7 +63,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSUInteger row = (NSUInteger)indexPath.row;
-    cell.textLabel.text = NSLocalizedString((self.topics)[row], nil);
+    cell.textLabel.text = NSLocalizedStringFromTableInBundle((self.topics)[row],  @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
 
     return cell;
 }
