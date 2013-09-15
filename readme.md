@@ -28,7 +28,7 @@ also be able to UITableViewController Subclass.
 See ``FeedbackTableViewController`` for details.
 
 
-### Custom Localize
+### Custom Localization
 
 When using AAMFeedback via CocoaPods, you should following setting to custom localization.
 
