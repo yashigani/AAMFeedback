@@ -6,9 +6,19 @@ Simple Feedback library, forked form [fladdict/AAMFeedback](https://github.com/f
 
 ## Installation
 
-	pod 'AAMFeedback', :git => 'https://github.com/azu/AAMFeedback.git'
+	pod 'AAMFeedback', :git => 'https://github.com/azu/AAMFeedback.git', :tag =>'0.0.6'
 
-You should use ">= Cocoapods 0.24.0".
+You should use "> Cocoapods 0.24.0".
+
+## CAUTION
+
+CocoaPod 0.24.0 has `resource_bundles` issue.
+
+* [Fix Issues in 0.24.0 with Resource Bundles and Archive Action by blakewatters · Pull Request #1329 · CocoaPods/CocoaPods](https://github.com/CocoaPods/CocoaPods/pull/1329 "Fix Issues in 0.24.0 with Resource Bundles and Archive Action by blakewatters · Pull Request #1329 · CocoaPods/CocoaPods")
+
+You should use 0.0.6 until this issue is resolved.
+
+	pod 'AAMFeedback', :git => 'https://github.com/azu/AAMFeedback.git', :tag =>'0.0.6'
 
 ## Usage
 
