@@ -81,20 +81,10 @@ static BOOL _alwaysUseMainBundle = NO;
 
 #pragma mark - View lifecycle
 
-- (void)loadView {
-    [super loadView];
-
-    self.title = NSLocalizedStringFromTableInBundle(@"AAMFeedbackTitle", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
-    BOOL isModal = (self.presentingViewController != nil);
-    if (isModal) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDidPress:)];
-    }
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"AAMFeedbackButtonMail", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = NSLocalizedStringFromTableInBundle(@"AAMFeedbackTitle", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
     if (self.topics == nil) {
         self.topics = @[
             NSLocalizedStringFromTableInBundle(@"AAMFeedbackTopicsQuestion", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil),
@@ -133,6 +123,7 @@ static BOOL _alwaysUseMainBundle = NO;
 
 - (void)viewWillAppear:(BOOL) animated {
     [super viewWillAppear:animated];
+    [self _updateNavigation];
     [self _updatePlaceholder];
     [self.tableView reloadData];
 }
@@ -348,6 +339,32 @@ static BOOL _alwaysUseMainBundle = NO;
 }
 
 #pragma mark - Internal Info
+// http://stackoverflow.com/questions/2798653/is-it-possible-to-determine-whether-viewcontroller-is-presented-as-modal
+- (BOOL)isModal {
+    BOOL isModal = ((self.parentViewController && self.parentViewController.modalViewController == self) ||
+        //or if I have a navigation controller, check if its parent modal view controller is self navigation controller
+        (self.navigationController && self.navigationController.parentViewController && self.navigationController.parentViewController.modalViewController == self.navigationController) ||
+        //or if the parent of my UITabBarController is also a UITabBarController class, then there is no way to do that, except by using a modal presentation
+        [[[self tabBarController] parentViewController] isKindOfClass:[UITabBarController class]]);
+
+    //iOS 5+
+    if (!isModal && [self respondsToSelector:@selector(presentingViewController)]) {
+        isModal = ((self.presentingViewController && self.presentingViewController.modalViewController == self) ||
+            //or if I have a navigation controller, check if its parent modal view controller is self navigation controller
+            (self.navigationController && self.navigationController.presentingViewController && self.navigationController.presentingViewController.modalViewController == self.navigationController) ||
+            //or if the parent of my UITabBarController is also a UITabBarController class, then there is no way to do that, except by using a modal presentation
+            [[[self tabBarController] presentingViewController] isKindOfClass:[UITabBarController class]]);
+
+    }
+    return isModal;
+}
+
+- (void)_updateNavigation {
+    if ([self isModal]) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelDidPress:)];
+    }
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"AAMFeedbackButtonMail", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil) style:UIBarButtonItemStyleDone target:self action:@selector(nextDidPress:)];
+}
 
 - (void)_updatePlaceholder {
     if ([_descriptionTextView.text length] > 0) {
