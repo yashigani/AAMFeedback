@@ -131,7 +131,7 @@ static BOOL _alwaysUseMainBundle = NO;
 - (void)viewDidAppear:(BOOL) animated {
     [super viewDidAppear:animated];
     if (_isFeedbackSent) {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
