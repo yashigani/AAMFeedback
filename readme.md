@@ -10,16 +10,6 @@ Simple Feedback library, forked from [fladdict/AAMFeedback](https://github.com/f
 
 You should use "> Cocoapods [0.25.0](https://github.com/CocoaPods/CocoaPods/blob/master/CHANGELOG.md#0250 "0.25.0")".
 
-## CAUTION(less than CocoaPods 0.24.0)
-
-<del>CocoaPod 0.24.0 has `resource_bundles` issue.</del> fixed in CocoaPods 0.25.0.
-
-* [Fix Issues in 0.24.0 with Resource Bundles and Archive Action by blakewatters · Pull Request #1329 · CocoaPods/CocoaPods](https://github.com/CocoaPods/CocoaPods/pull/1329 "Fix Issues in 0.24.0 with Resource Bundles and Archive Action by blakewatters · Pull Request #1329 · CocoaPods/CocoaPods")
-
-You should use 0.0.6 until this issue is resolved.
-
-	pod 'AAMFeedback', :git => 'https://github.com/azu/AAMFeedback.git', :tag =>'0.0.6'
-
 ## Usage
 
 See Sample
@@ -60,6 +50,16 @@ Thanks [Move lproj directories to Appirater.bundle when using CocoaPods by eager
 * Device information is defined by the use of [squarefrog/UIDeviceIdentifier](https://github.com/squarefrog/UIDeviceIdentifier "squarefrog/UIDeviceIdentifier").
 * Custom BackgroundImage/Topics/Localized.string
 * Added spanish locale.(thanks @ericertl)
+
+## Note
+
+#### less than CocoaPods 0.24.0
+
+<del>CocoaPod 0.24.0 has `resource_bundles` issue.</del> fixed in CocoaPods 0.25.0.
+
+* [Fix Issues in 0.24.0 with Resource Bundles and Archive Action by blakewatters · Pull Request #1329 · CocoaPods/CocoaPods](https://github.com/CocoaPods/CocoaPods/pull/1329 "Fix Issues in 0.24.0 with Resource Bundles and Archive Action by blakewatters · Pull Request #1329 · CocoaPods/CocoaPods")
+
+You should update `cocoapods`.
 
 ## Contributing
 
