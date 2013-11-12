@@ -161,7 +161,7 @@ static BOOL _alwaysUseMainBundle = NO;
     return 4;
 }
 
-- (float)tableView:(UITableView *) tableView heightForRowAtIndexPath:(NSIndexPath *) indexPath {
+- (CGFloat)tableView:(UITableView *) tableView heightForRowAtIndexPath:(NSIndexPath *) indexPath {
     if (indexPath.section == 0 && indexPath.row == 1) {
         return MAX(88, _descriptionTextView.contentSize.height);
     }
