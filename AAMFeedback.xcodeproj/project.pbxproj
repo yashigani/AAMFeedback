@@ -355,7 +355,7 @@
 				ORGANIZATIONNAME = "Art & Mobile";
 				TargetAttributes = {
 					739B28581820FE7D00AC9D97 = {
-						TestTargetID = 3D02635D14861E3700FBC566 /* AAMFeedback */;
+						TestTargetID = 3D02635D14861E3700FBC566;
 					};
 				};
 			};

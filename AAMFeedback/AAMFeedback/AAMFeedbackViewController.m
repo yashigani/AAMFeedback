@@ -163,7 +163,7 @@ static BOOL _alwaysUseMainBundle = NO;
 
 - (CGFloat)tableView:(UITableView *) tableView heightForRowAtIndexPath:(NSIndexPath *) indexPath {
     if (indexPath.section == 0 && indexPath.row == 1) {
-        return MAX(88, _descriptionTextView.contentSize.height);
+        return MAX(88, [self contentSizeOfTextView:_descriptionTextView].height);
     }
 
     return 44;
@@ -307,17 +307,21 @@ static BOOL _alwaysUseMainBundle = NO;
 
 
 - (void)textViewDidChange:(UITextView *) textView {
+    //Magic for updating Cell height
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+
     CGRect f = _descriptionTextView.frame;
-    f.size.height = _descriptionTextView.contentSize.height;
+    f.size.height = [self contentSizeOfTextView:_descriptionTextView].height;
     _descriptionTextView.frame = f;
     [self _updatePlaceholder];
     self.descriptionText = _descriptionTextView.text;
 
-    //Magic for updating Cell height
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
 }
 
+- (CGSize)contentSizeOfTextView:(UITextView *) myTextView {
+    return [myTextView sizeThatFits:CGSizeMake(myTextView.frame.size.width, FLT_MAX)];
+}
 
 - (void)mailComposeController:(MFMailComposeViewController *) controller
           didFinishWithResult:(MFMailComposeResult) result error:(NSError *) error {
