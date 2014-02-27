@@ -15,6 +15,12 @@ static BOOL _alwaysUseMainBundle = NO;
 
 @interface AAMFeedbackViewController ()
 
+@property(nonatomic, strong) UITextView *descriptionTextView;
+
+@property(nonatomic, strong) UITextField *descriptionPlaceHolder;
+
+@property(nonatomic) BOOL isFeedbackSent;
+
 - (NSString *)_platformString;
 
 - (NSString *)_feedbackSubject;
@@ -117,8 +123,8 @@ static BOOL _alwaysUseMainBundle = NO;
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    _descriptionPlaceHolder = nil;
-    _descriptionTextView = nil;
+    self.descriptionPlaceHolder = nil;
+    self.descriptionTextView = nil;
 }
 
 - (void)viewWillAppear:(BOOL) animated {
@@ -130,7 +136,7 @@ static BOOL _alwaysUseMainBundle = NO;
 
 - (void)viewDidAppear:(BOOL) animated {
     [super viewDidAppear:animated];
-    if (_isFeedbackSent) {
+    if (self.isFeedbackSent) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -163,7 +169,7 @@ static BOOL _alwaysUseMainBundle = NO;
 
 - (CGFloat)tableView:(UITableView *) tableView heightForRowAtIndexPath:(NSIndexPath *) indexPath {
     if (indexPath.section == 0 && indexPath.row == 1) {
-        return MAX(88, [self contentSizeOfTextView:_descriptionTextView].height);
+        return MAX(88, [self contentSizeOfTextView:self.descriptionTextView].height);
     }
 
     return 44;
@@ -199,21 +205,21 @@ static BOOL _alwaysUseMainBundle = NO;
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                _descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, 300,
+                self.descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, 300,
                     88)];
-                _descriptionTextView.backgroundColor = [UIColor clearColor];
-                _descriptionTextView.font = [UIFont systemFontOfSize:16];
-                _descriptionTextView.delegate = self;
-                _descriptionTextView.scrollEnabled = NO;
-                _descriptionTextView.text = self.descriptionText;
-                [cell.contentView addSubview:_descriptionTextView];
+                self.descriptionTextView.backgroundColor = [UIColor clearColor];
+                self.descriptionTextView.font = [UIFont systemFontOfSize:16];
+                self.descriptionTextView.delegate = self;
+                self.descriptionTextView.scrollEnabled = NO;
+                self.descriptionTextView.text = self.descriptionText;
+                [cell.contentView addSubview:self.descriptionTextView];
 
-                _descriptionPlaceHolder = [[UITextField alloc] initWithFrame:CGRectMake(16, 8, 300,
+                self.descriptionPlaceHolder = [[UITextField alloc] initWithFrame:CGRectMake(16, 8, 300,
                     20)];
-                _descriptionPlaceHolder.font = [UIFont systemFontOfSize:16];
-                _descriptionPlaceHolder.placeholder = NSLocalizedStringFromTableInBundle(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
-                _descriptionPlaceHolder.userInteractionEnabled = NO;
-                [cell.contentView addSubview:_descriptionPlaceHolder];
+                self.descriptionPlaceHolder.font = [UIFont systemFontOfSize:16];
+                self.descriptionPlaceHolder.placeholder = NSLocalizedStringFromTableInBundle(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
+                self.descriptionPlaceHolder.userInteractionEnabled = NO;
+                [cell.contentView addSubview:self.descriptionPlaceHolder];
 
                 [self _updatePlaceholder];
             }
@@ -273,7 +279,7 @@ static BOOL _alwaysUseMainBundle = NO;
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {
     if (indexPath.section == 0 && indexPath.row == 0) {
-        [_descriptionTextView resignFirstResponder];
+        [self.descriptionTextView resignFirstResponder];
         AAMFeedbackTopicsViewController *topicsViewController = [[AAMFeedbackTopicsViewController alloc] initWithStyle:UITableViewStyleGrouped];
         if (self.backgroundImage != nil) {
             UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:self.backgroundImage];
@@ -292,7 +298,7 @@ static BOOL _alwaysUseMainBundle = NO;
 }
 
 - (void)nextDidPress:(id) sender {
-    [_descriptionTextView resignFirstResponder];
+    [self.descriptionTextView resignFirstResponder];
 
     MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
     mailComposeViewController.mailComposeDelegate = self;
@@ -311,11 +317,11 @@ static BOOL _alwaysUseMainBundle = NO;
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
 
-    CGRect f = _descriptionTextView.frame;
-    f.size.height = [self contentSizeOfTextView:_descriptionTextView].height;
-    _descriptionTextView.frame = f;
+    CGRect f = self.descriptionTextView.frame;
+    f.size.height = [self contentSizeOfTextView:self.descriptionTextView].height;
+    self.descriptionTextView.frame = f;
     [self _updatePlaceholder];
-    self.descriptionText = _descriptionTextView.text;
+    self.descriptionText = self.descriptionTextView.text;
 
 }
 
@@ -327,7 +333,7 @@ static BOOL _alwaysUseMainBundle = NO;
           didFinishWithResult:(MFMailComposeResult) result error:(NSError *) error {
     if (result == MFMailComposeResultCancelled) {
     } else if (result == MFMailComposeResultSent) {
-        _isFeedbackSent = YES;
+        self.isFeedbackSent = YES;
     } else if (result == MFMailComposeResultFailed) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedStringFromTableInBundle(@"AAMFeedbackMailDidFinishWithError", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil)
                                                                     delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
@@ -371,10 +377,10 @@ static BOOL _alwaysUseMainBundle = NO;
 }
 
 - (void)_updatePlaceholder {
-    if ([_descriptionTextView.text length] > 0) {
-        _descriptionPlaceHolder.hidden = YES;
+    if ([self.descriptionTextView.text length] > 0) {
+        self.descriptionPlaceHolder.hidden = YES;
     } else {
-        _descriptionPlaceHolder.hidden = NO;
+        self.descriptionPlaceHolder.hidden = NO;
     }
 }
 
@@ -384,7 +390,7 @@ static BOOL _alwaysUseMainBundle = NO;
 
 - (NSString *)_feedbackBody {
     NSString *body = [NSString stringWithFormat:@"%@\n\n\nDevice:\n%@\n\niOS:\n%@\n\nApp:\n%@ %@",
-                                                _descriptionTextView.text,
+                                                self.descriptionTextView.text,
                                                 [self _platformString],
                                                 [UIDevice currentDevice].systemVersion,
                                                 [self _appName],

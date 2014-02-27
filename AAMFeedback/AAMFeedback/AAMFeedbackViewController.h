@@ -11,11 +11,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 
 @interface AAMFeedbackViewController : UITableViewController <UITextViewDelegate, MFMailComposeViewControllerDelegate>
-{
-    UITextView  *_descriptionTextView;
-    UITextField *_descriptionPlaceHolder;
-    BOOL _isFeedbackSent;
-}
+
 
 @property (strong, nonatomic) NSString *descriptionText;
 @property (strong, nonatomic) NSArray *topics;
@@ -33,6 +29,5 @@
 
 + (void)setAlwaysUseMainBundle:(BOOL) alwaysUseMainBundle;
 #pragma mark - internal
-
 + (NSBundle *)bundle;
 @end
