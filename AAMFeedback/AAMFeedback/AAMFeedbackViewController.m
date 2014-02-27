@@ -292,6 +292,9 @@ static BOOL _alwaysUseMainBundle = NO;
             UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:self.backgroundImage];
             topicsViewController.tableView.backgroundView = backgroundImageView;
         }
+        if (self.view.backgroundColor != nil) {
+            topicsViewController.view.backgroundColor = self.view.backgroundColor;
+        }
         topicsViewController.topics = [self.topics copy];
         topicsViewController.delegate = self;
         topicsViewController.selectedIndex = _selectedTopicsIndex;
