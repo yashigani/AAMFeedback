@@ -13,17 +13,19 @@
 @interface AAMFeedbackViewController : UITableViewController <UITextViewDelegate, MFMailComposeViewControllerDelegate>
 
 
-@property (strong, nonatomic) NSString *descriptionText;
-@property (strong, nonatomic) NSArray *topics;
-@property (strong, nonatomic) NSArray *topicsToSend;
-@property (strong, nonatomic) NSArray *toRecipients;
-@property (strong, nonatomic) NSArray *ccRecipients;
-@property (strong, nonatomic) NSArray *bccRecipients;
+@property(strong, nonatomic) NSString *descriptionText;
+@property(strong, nonatomic) NSArray *topics;
+@property(strong, nonatomic) NSArray *topicsToSend;
+@property(strong, nonatomic) NSArray *toRecipients;
+@property(strong, nonatomic) NSArray *ccRecipients;
+@property(strong, nonatomic) NSArray *bccRecipients;
 #pragma mark - customize
-@property (strong, nonatomic) UIImage *backgroundImage;
-@property (assign, nonatomic) NSInteger selectedTopicsIndex;
+@property(strong, nonatomic) UIImage *backgroundImage;
+@property(nonatomic) NSInteger selectedTopicsIndex;
+@property(strong, nonatomic) MFMailComposeViewController *mailComposeViewController;
 
-- (instancetype)initWithTopics:(NSArray*)theTopics;
+
+- (instancetype)initWithTopics:(NSArray *) theTopics;
 
 + (BOOL)isAvailable;
 

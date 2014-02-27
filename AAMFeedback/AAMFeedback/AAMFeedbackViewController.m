@@ -45,6 +45,13 @@ static BOOL _alwaysUseMainBundle = NO;
     return [MFMailComposeViewController canSendMail];
 }
 
+- (MFMailComposeViewController *)mailComposeViewController {
+    if (_mailComposeViewController == nil) {
+        _mailComposeViewController = [[MFMailComposeViewController alloc] init];
+    }
+    return _mailComposeViewController;
+}
+
 - (id)initWithStyle:(UITableViewStyle) style {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self == nil) {
@@ -300,15 +307,14 @@ static BOOL _alwaysUseMainBundle = NO;
 - (void)nextDidPress:(id) sender {
     [self.descriptionTextView resignFirstResponder];
 
-    MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
-    mailComposeViewController.mailComposeDelegate = self;
-    [mailComposeViewController setToRecipients:self.toRecipients];
-    [mailComposeViewController setCcRecipients:self.ccRecipients];
-    [mailComposeViewController setBccRecipients:self.bccRecipients];
+    self.mailComposeViewController.mailComposeDelegate = self;
+    [self.mailComposeViewController setToRecipients:self.toRecipients];
+    [self.mailComposeViewController setCcRecipients:self.ccRecipients];
+    [self.mailComposeViewController setBccRecipients:self.bccRecipients];
 
-    [mailComposeViewController setSubject:[self _feedbackSubject]];
-    [mailComposeViewController setMessageBody:[self _feedbackBody] isHTML:NO];
-    [self presentViewController:mailComposeViewController animated:YES completion:nil];
+    [self.mailComposeViewController setSubject:[self _feedbackSubject]];
+    [self.mailComposeViewController setMessageBody:[self _feedbackBody] isHTML:NO];
+    [self presentViewController:self.mailComposeViewController animated:YES completion:nil];
 }
 
 
