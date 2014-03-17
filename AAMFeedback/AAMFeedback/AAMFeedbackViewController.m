@@ -309,7 +309,9 @@ static BOOL _alwaysUseMainBundle = NO;
 
 - (void)nextDidPress:(id) sender {
     [self.descriptionTextView resignFirstResponder];
-
+    if (![[self class] isAvailable]) {
+        return;
+    }
     self.mailComposeViewController.mailComposeDelegate = self;
     [self.mailComposeViewController setToRecipients:self.toRecipients];
     [self.mailComposeViewController setCcRecipients:self.ccRecipients];
