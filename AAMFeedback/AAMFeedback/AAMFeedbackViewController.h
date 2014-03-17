@@ -22,8 +22,7 @@
 #pragma mark - customize
 @property(strong, nonatomic) UIImage *backgroundImage;
 @property(nonatomic) NSInteger selectedTopicsIndex;
-@property(strong, nonatomic) MFMailComposeViewController *mailComposeViewController;
-
+@property(nonatomic, copy) void (^beforeShowAction)(MFMailComposeViewController *);
 
 - (instancetype)initWithTopics:(NSArray *) theTopics;
 

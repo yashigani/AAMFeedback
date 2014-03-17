@@ -45,13 +45,6 @@ static BOOL _alwaysUseMainBundle = NO;
     return [MFMailComposeViewController canSendMail];
 }
 
-- (MFMailComposeViewController *)mailComposeViewController {
-    if (_mailComposeViewController == nil) {
-        _mailComposeViewController = [[MFMailComposeViewController alloc] init];
-    }
-    return _mailComposeViewController;
-}
-
 - (id)initWithStyle:(UITableViewStyle) style {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self == nil) {
@@ -221,7 +214,8 @@ static BOOL _alwaysUseMainBundle = NO;
                 self.descriptionTextView.text = self.descriptionText;
                 [cell.contentView addSubview:self.descriptionTextView];
 
-                self.descriptionPlaceHolder = [[UITextField alloc] initWithFrame:CGRectMake(16, 8, 300,
+                self.descriptionPlaceHolder = [[UITextField alloc] initWithFrame:CGRectMake(16, 8,
+                    300,
                     20)];
                 self.descriptionPlaceHolder.font = [UIFont systemFontOfSize:16];
                 self.descriptionPlaceHolder.placeholder = NSLocalizedStringFromTableInBundle(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
@@ -312,14 +306,17 @@ static BOOL _alwaysUseMainBundle = NO;
     if (![[self class] isAvailable]) {
         return;
     }
-    self.mailComposeViewController.mailComposeDelegate = self;
-    [self.mailComposeViewController setToRecipients:self.toRecipients];
-    [self.mailComposeViewController setCcRecipients:self.ccRecipients];
-    [self.mailComposeViewController setBccRecipients:self.bccRecipients];
-
-    [self.mailComposeViewController setSubject:[self _feedbackSubject]];
-    [self.mailComposeViewController setMessageBody:[self _feedbackBody] isHTML:NO];
-    [self presentViewController:self.mailComposeViewController animated:YES completion:nil];
+    MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
+    mailComposeViewController.mailComposeDelegate = self;
+    [mailComposeViewController setToRecipients:self.toRecipients];
+    [mailComposeViewController setCcRecipients:self.ccRecipients];
+    [mailComposeViewController setBccRecipients:self.bccRecipients];
+    [mailComposeViewController setSubject:[self _feedbackSubject]];
+    [mailComposeViewController setMessageBody:[self _feedbackBody] isHTML:NO];
+    if (self.beforeShowAction) {
+        self.beforeShowAction(mailComposeViewController);
+    }
+    [self presentViewController:mailComposeViewController animated:YES completion:nil];
 }
 
 

@@ -17,7 +17,10 @@
     vc.toRecipients = @[@"YOUR_CONTACT@email.com"];
     vc.ccRecipients = nil;
     vc.bccRecipients = nil;
-    vc.view.backgroundColor = [UIColor lightGrayColor];
+    vc.view.backgroundColor = [UIColor whiteColor];
+    vc.beforeShowAction = ^(MFMailComposeViewController *controller) {
+        [controller addAttachmentData:[@"text" dataUsingEncoding:NSUTF8StringEncoding] mimeType:@"text/plain" fileName:@"example.text"];
+    };
     UINavigationController *feedbackNavigation = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:feedbackNavigation animated:YES completion:nil];
 }
