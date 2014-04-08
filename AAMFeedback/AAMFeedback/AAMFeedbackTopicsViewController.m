@@ -83,7 +83,7 @@
 #pragma mark - Internal
 - (void)_updateCellSelection {
     NSArray *cells = [self.tableView visibleCells];
-    int n = [cells count];
+    NSUInteger n = [cells count];
     for (int i = 0; i < n; i++) {
         UITableViewCell *cell = cells[(NSUInteger)i];
         cell.textLabel.textColor = [UIColor blackColor];
