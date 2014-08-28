@@ -8,25 +8,23 @@ Simple Feedback library, forked from [fladdict/AAMFeedback](https://github.com/f
 
 	pod 'AAMFeedback', :git => 'https://github.com/azu/AAMFeedback.git'
 
-You should use "> Cocoapods [0.25.0](https://github.com/CocoaPods/CocoaPods/blob/master/CHANGELOG.md#0250 "0.25.0")".
-
 ## Usage
 
-See Sample
+See Example
 
 ``` objc
-AAMFeedbackViewController *vc = [[AAMFeedbackViewController alloc] init];
-vc.toRecipients = @[@"YOUR_CONTACT@email.com"];
-vc.ccRecipients = nil;
-vc.bccRecipients = nil;
-UINavigationController *feedbackNavigation = [[UINavigationController alloc] initWithRootViewController:vc];
+AAMFeedbackViewController *feedbackViewController = [[AAMFeedbackViewController alloc] init];
+feedbackViewController.toRecipients = @[@"YOUR_CONTACT@email.com"];
+feedbackViewController.ccRecipients = nil;
+feedbackViewController.bccRecipients = nil;
+UINavigationController *feedbackNavigation = [[UINavigationController alloc] initWithRootViewController:feedbackViewController];
 [self presentViewController:feedbackNavigation animated:YES completion:nil];
 ```
 
-also be able to UITableViewController Subclass.
+AAMFeedbackViewController is a UITableViewController Subclass.
+You can use setting `AAMFeedbackViewController` to the view controller's custom class in storyboard.
 
-See ``FeedbackTableViewController`` for details.
-
+For details, See ``FeedbackTableViewController`` of Example.
 
 ### Custom Localization
 
@@ -46,20 +44,10 @@ Thanks [Move lproj directories to Appirater.bundle when using CocoaPods by eager
 
 ## Difference from original [fladdict/AAMFeedback](https://github.com/fladdict/AAMFeedback "fladdict/AAMFeedback")
 
-* **ARC**ed.
+* **ARC** ed.
 * Device information is defined by the use of [squarefrog/UIDeviceIdentifier](https://github.com/squarefrog/UIDeviceIdentifier "squarefrog/UIDeviceIdentifier").
 * Custom BackgroundImage/Topics/Localized.string
 * Added spanish locale.(thanks @ericertl)
-
-## Note
-
-#### less than CocoaPods 0.24.0
-
-<del>CocoaPod 0.24.0 has `resource_bundles` issue.</del> fixed in CocoaPods 0.25.0.
-
-* [Fix Issues in 0.24.0 with Resource Bundles and Archive Action by blakewatters · Pull Request #1329 · CocoaPods/CocoaPods](https://github.com/CocoaPods/CocoaPods/pull/1329 "Fix Issues in 0.24.0 with Resource Bundles and Archive Action by blakewatters · Pull Request #1329 · CocoaPods/CocoaPods")
-
-You should update `cocoapods`.
 
 ## Contributing
 
