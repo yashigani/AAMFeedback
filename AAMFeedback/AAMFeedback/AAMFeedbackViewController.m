@@ -17,7 +17,7 @@ static BOOL _alwaysUseMainBundle = NO;
 
 @property(nonatomic, strong) UITextView *descriptionTextView;
 
-@property(nonatomic, strong) UITextField *descriptionPlaceHolder;
+@property(nonatomic, strong) UILabel *descriptionPlaceHolder;
 
 @property(nonatomic) BOOL isFeedbackSent;
 
@@ -213,14 +213,15 @@ static BOOL _alwaysUseMainBundle = NO;
                 self.descriptionTextView.scrollEnabled = NO;
                 self.descriptionTextView.text = self.descriptionText;
                 [cell.contentView addSubview:self.descriptionTextView];
-
-                self.descriptionPlaceHolder = [[UITextField alloc] initWithFrame:CGRectMake(16, 8,
-                    300,
-                    20)];
+                
+                self.descriptionPlaceHolder = [[UILabel alloc] initWithFrame:CGRectMake(16, 8, 300, 88)];
                 self.descriptionPlaceHolder.font = [UIFont systemFontOfSize:16];
-                self.descriptionPlaceHolder.placeholder = NSLocalizedStringFromTableInBundle(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
+                self.descriptionPlaceHolder.text = NSLocalizedStringFromTableInBundle(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
+                self.descriptionPlaceHolder.textColor = [UIColor lightGrayColor];
+                self.descriptionPlaceHolder.numberOfLines = 0;
                 self.descriptionPlaceHolder.userInteractionEnabled = NO;
                 [cell.contentView addSubview:self.descriptionPlaceHolder];
+                [self.descriptionPlaceHolder sizeToFit];
 
                 [self _updatePlaceholder];
             }
