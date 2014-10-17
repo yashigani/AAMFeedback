@@ -34,6 +34,7 @@
 		739B285B1820FE7D00AC9D97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D02636414861E3700FBC566 /* Foundation.framework */; };
 		739B285C1820FE7D00AC9D97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D02636214861E3700FBC566 /* UIKit.framework */; };
 		739B28621820FE7D00AC9D97 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 739B28601820FE7D00AC9D97 /* InfoPlist.strings */; };
+		73D0875C19F0C0AF0053D1AD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73D0875B19F0C0AF0053D1AD /* Default-568h@2x.png */; };
 		E5ED7396D3D94FABB93832D8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AF527EA1C604761BC2E601D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		17B5C8DD1936E5FE45D74E45 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = AAMLocalizable.strings; sourceTree = "<group>"; };
 		17B5CBFCBC382786415697D1 /* AcceptanceTestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcceptanceTestHelper.h; sourceTree = "<group>"; };
 		17B5CD2D93C20C111AC25B07 /* FeedbackTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackTableViewController.m; sourceTree = "<group>"; };
+		221602638AFECBFB6EAAC7C9 /* Pods-Acceptance Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptance Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptance Tests/Pods-Acceptance Tests.release.xcconfig"; sourceTree = "<group>"; };
 		3D02635E14861E3700FBC566 /* AAMFeedback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAMFeedback.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D02636214861E3700FBC566 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3D02636414861E3700FBC566 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,14 +88,16 @@
 		3D0263A214861EE800FBC566 /* AAMFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAMFeedbackViewController.h; sourceTree = "<group>"; };
 		3D0263A314861EE800FBC566 /* AAMFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAMFeedbackViewController.m; sourceTree = "<group>"; };
 		3D0263AF14861F7100FBC566 /* MessageUI.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		44C187DB2BA6159645B7BE39 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		4DB18BFFB536DBB2D7366D33 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7386D147177D5C78003A3971 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		739B28591820FE7D00AC9D97 /* Acceptance Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Acceptance Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		739B285F1820FE7D00AC9D97 /* Acceptance Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Acceptance Tests-Info.plist"; sourceTree = "<group>"; };
 		739B28611820FE7D00AC9D97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		739B28651820FE7D00AC9D97 /* Acceptance Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Acceptance Tests-Prefix.pch"; sourceTree = "<group>"; };
-		8A159C9CADF643BC9BCA3426 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		73D0875B19F0C0AF0053D1AD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8AF527EA1C604761BC2E601D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		CCD0C682B2764831A54C2F37 /* Pods-Acceptance Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptance Tests.xcconfig"; path = "Pods/Pods-Acceptance Tests.xcconfig"; sourceTree = "<group>"; };
+		DA31C7658923362A35805584 /* Pods-Acceptance Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acceptance Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Acceptance Tests/Pods-Acceptance Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		F77B1C806A1F4DA782FC23CF /* libPods-Acceptance Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Acceptance Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -158,17 +162,28 @@
 			path = ja.lproj;
 			sourceTree = "<group>";
 		};
+		35B8CEA1B51EB4381A70B0E9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4DB18BFFB536DBB2D7366D33 /* Pods.debug.xcconfig */,
+				44C187DB2BA6159645B7BE39 /* Pods.release.xcconfig */,
+				DA31C7658923362A35805584 /* Pods-Acceptance Tests.debug.xcconfig */,
+				221602638AFECBFB6EAAC7C9 /* Pods-Acceptance Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3D02635314861E3700FBC566 = {
 			isa = PBXGroup;
 			children = (
+				73D0875B19F0C0AF0053D1AD /* Default-568h@2x.png */,
 				3D02636814861E3800FBC566 /* src */,
 				3D02638614861E3800FBC566 /* AAMFeedbackTests */,
 				739B285D1820FE7D00AC9D97 /* Acceptance Tests */,
 				3D02636114861E3700FBC566 /* Frameworks */,
 				3D02635F14861E3700FBC566 /* Products */,
 				17B5C381A98A914B625AEF2F /* Podfile */,
-				8A159C9CADF643BC9BCA3426 /* Pods.xcconfig */,
-				CCD0C682B2764831A54C2F37 /* Pods-Acceptance Tests.xcconfig */,
+				35B8CEA1B51EB4381A70B0E9 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -324,7 +339,7 @@
 			name = AAMFeedbackTests;
 			productName = AAMFeedbackTests;
 			productReference = 3D02637F14861E3800FBC566 /* AAMFeedbackTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		739B28581820FE7D00AC9D97 /* Acceptance Tests */ = {
 			isa = PBXNativeTarget;
@@ -344,7 +359,7 @@
 			name = "Acceptance Tests";
 			productName = "Acceptance Tests";
 			productReference = 739B28591820FE7D00AC9D97 /* Acceptance Tests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -352,7 +367,7 @@
 		3D02635514861E3700FBC566 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Art & Mobile";
 				TargetAttributes = {
 					739B28581820FE7D00AC9D97 = {
@@ -391,6 +406,7 @@
 				17B5C01043A17CF6DA59FC35 /* AAMLocalizable.strings in Resources */,
 				7386D148177D5C78003A3971 /* Storyboard.storyboard in Resources */,
 				078230C4178DB79100214106 /* AAMLocalizable.strings in Resources */,
+				73D0875C19F0C0AF0053D1AD /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +456,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-Acceptance Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Acceptance Tests/Pods-Acceptance Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3D02637D14861E3800FBC566 /* ShellScript */ = {
@@ -483,7 +499,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -595,9 +611,11 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -629,9 +647,11 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -650,13 +670,14 @@
 		};
 		3D02639214861E3800FBC566 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A159C9CADF643BC9BCA3426 /* Pods.xcconfig */;
+			baseConfigurationReference = 4DB18BFFB536DBB2D7366D33 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AAMFeedback/AAMFeedback-Prefix.pch";
 				INFOPLIST_FILE = "AAMFeedback/AAMFeedback-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/** \"${PROJECT_DIR}/\"/** \"${PROJECT_DIR}/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -664,13 +685,14 @@
 		};
 		3D02639314861E3800FBC566 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A159C9CADF643BC9BCA3426 /* Pods.xcconfig */;
+			baseConfigurationReference = 44C187DB2BA6159645B7BE39 /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AAMFeedback/AAMFeedback-Prefix.pch";
 				INFOPLIST_FILE = "AAMFeedback/AAMFeedback-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/** \"${PROJECT_DIR}/\"/** \"${PROJECT_DIR}/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -714,7 +736,7 @@
 		};
 		739B28681820FE7D00AC9D97 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCD0C682B2764831A54C2F37 /* Pods-Acceptance Tests.xcconfig */;
+			baseConfigurationReference = DA31C7658923362A35805584 /* Pods-Acceptance Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AAMFeedback.app/AAMFeedback";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -756,7 +778,7 @@
 		};
 		739B28691820FE7D00AC9D97 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCD0C682B2764831A54C2F37 /* Pods-Acceptance Tests.xcconfig */;
+			baseConfigurationReference = 221602638AFECBFB6EAAC7C9 /* Pods-Acceptance Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AAMFeedback.app/AAMFeedback";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
