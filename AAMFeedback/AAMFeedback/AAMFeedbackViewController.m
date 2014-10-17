@@ -84,7 +84,6 @@ static BOOL _alwaysUseMainBundle = NO;
 }
 
 
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -205,16 +204,18 @@ static BOOL _alwaysUseMainBundle = NO;
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                self.descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, 300,
-                    88)];
+                NSInteger textViewMargin = 10;
+                self.descriptionTextView = [[UITextView alloc] initWithFrame:CGRectInset(cell.contentView.frame, textViewMargin, 0)];
+                self.descriptionTextView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
                 self.descriptionTextView.backgroundColor = [UIColor clearColor];
                 self.descriptionTextView.font = [UIFont systemFontOfSize:16];
                 self.descriptionTextView.delegate = self;
                 self.descriptionTextView.scrollEnabled = NO;
                 self.descriptionTextView.text = self.descriptionText;
                 [cell.contentView addSubview:self.descriptionTextView];
-                
-                self.descriptionPlaceHolder = [[UILabel alloc] initWithFrame:CGRectMake(16, 8, 300, 88)];
+
+                self.descriptionPlaceHolder = [[UILabel alloc] initWithFrame:CGRectInset(cell.contentView.frame, textViewMargin, 5)];
+                self.descriptionPlaceHolder.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
                 self.descriptionPlaceHolder.font = [UIFont systemFontOfSize:16];
                 self.descriptionPlaceHolder.text = NSLocalizedStringFromTableInBundle(@"AAMFeedbackDescriptionPlaceholder", @"AAMLocalizable", [AAMFeedbackViewController bundle], nil);
                 self.descriptionPlaceHolder.textColor = [UIColor lightGrayColor];
@@ -274,7 +275,6 @@ static BOOL _alwaysUseMainBundle = NO;
 
     return cell;
 }
-
 
 
 #pragma mark - Table view delegate
@@ -358,21 +358,22 @@ static BOOL _alwaysUseMainBundle = NO;
 }
 
 #pragma mark - Internal Info
+
 // http://stackoverflow.com/questions/2798653/is-it-possible-to-determine-whether-viewcontroller-is-presented-as-modal
 - (BOOL)isModal {
     BOOL isModal = ((self.parentViewController && self.parentViewController.presentedViewController == self) ||
         //or if I have a navigation controller, check if its parent modal view controller is self navigation controller
-        (self.navigationController && self.navigationController.parentViewController && self.navigationController.parentViewController.presentedViewController == self.navigationController) ||
+            (self.navigationController && self.navigationController.parentViewController && self.navigationController.parentViewController.presentedViewController == self.navigationController) ||
         //or if the parent of my UITabBarController is also a UITabBarController class, then there is no way to do that, except by using a modal presentation
-        [[[self tabBarController] parentViewController] isKindOfClass:[UITabBarController class]]);
+            [[[self tabBarController] parentViewController] isKindOfClass:[UITabBarController class]]);
 
     //iOS 5+
     if (!isModal && [self respondsToSelector:@selector(presentingViewController)]) {
         isModal = ((self.presentingViewController && self.presentingViewController.presentedViewController == self) ||
             //or if I have a navigation controller, check if its parent modal view controller is self navigation controller
-            (self.navigationController && self.navigationController.presentingViewController && self.navigationController.presentingViewController.presentedViewController == self.navigationController) ||
+                (self.navigationController && self.navigationController.presentingViewController && self.navigationController.presentingViewController.presentedViewController == self.navigationController) ||
             //or if the parent of my UITabBarController is also a UITabBarController class, then there is no way to do that, except by using a modal presentation
-            [[[self tabBarController] presentingViewController] isKindOfClass:[UITabBarController class]]);
+                [[[self tabBarController] presentingViewController] isKindOfClass:[UITabBarController class]]);
 
     }
     return isModal;
