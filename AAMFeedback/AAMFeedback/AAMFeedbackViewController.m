@@ -83,6 +83,12 @@ static BOOL _alwaysUseMainBundle = NO;
     return bundle;
 }
 
+- (NSBundle *)applicationBundle {
+    if (!_applicationBundle) {
+        _applicationBundle = [NSBundle mainBundle];
+    }
+    return _applicationBundle;
+}
 
 #pragma mark - View lifecycle
 
@@ -418,11 +424,11 @@ static BOOL _alwaysUseMainBundle = NO;
 }
 
 - (NSString *)_appName {
-    return [[NSBundle mainBundle] infoDictionary][@"CFBundleDisplayName"];
+    return [self.applicationBundle infoDictionary][@"CFBundleDisplayName"];
 }
 
 - (NSString *)_appVersion {
-    return [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+    return [self.applicationBundle infoDictionary][@"CFBundleVersion"];
 }
 
 
