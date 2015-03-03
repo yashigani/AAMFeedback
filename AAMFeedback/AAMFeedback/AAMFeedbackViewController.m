@@ -71,7 +71,7 @@ static BOOL _alwaysUseMainBundle = NO;
     if (_alwaysUseMainBundle) {
         bundle = [NSBundle mainBundle];
     } else {
-        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"AAMFeedback" withExtension:@"bundle"];
+        NSURL *bundleURL = [[NSBundle bundleForClass:self.class] URLForResource:@"AAMFeedback" withExtension:@"bundle"];
         if (bundleURL) {
             // AAMFeedback.bundle will likely only exist when used via CocoaPods
             bundle = [NSBundle bundleWithURL:bundleURL];
