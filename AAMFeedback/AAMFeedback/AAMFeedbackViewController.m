@@ -424,7 +424,8 @@ static BOOL _alwaysUseMainBundle = NO;
 }
 
 - (NSString *)_appName {
-    return [self.applicationBundle infoDictionary][@"CFBundleDisplayName"];
+    NSDictionary *info = [self.applicationBundle infoDictionary];
+    return info[@"CFBundleDisplayName"] ?: info[@"CFBundleName"];
 }
 
 - (NSString *)_appVersion {
