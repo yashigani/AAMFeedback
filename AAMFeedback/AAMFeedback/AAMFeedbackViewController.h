@@ -19,7 +19,6 @@
 @property(strong, nonatomic) NSArray *toRecipients;
 @property(strong, nonatomic) NSArray *ccRecipients;
 @property(strong, nonatomic) NSArray *bccRecipients;
-@property(strong, nonatomic) NSBundle *applicationBundle;
 #pragma mark - customize
 @property(strong, nonatomic) UIImage *backgroundImage;
 @property(nonatomic) NSInteger selectedTopicsIndex;
